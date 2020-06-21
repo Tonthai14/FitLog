@@ -35,7 +35,7 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
     Switch moreSpecifications;
 
     List<TextView> durationItems;
-
+    // Test comment
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
