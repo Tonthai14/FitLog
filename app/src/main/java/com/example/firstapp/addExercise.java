@@ -35,7 +35,7 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
     Switch moreSpecifications;
 
     List<TextView> durationItems;
-    // Test comment
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,12 +129,6 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
         spinner.setOnItemSelectedListener(this);
     }
 
-    public void setDurationVisibility(int visibility) {
-        for(int index = 0; index < durationItems.size(); index++) {
-            durationItems.get(index).setVisibility(visibility);
-        }
-    }
-
     public void toggleExtraSpecifications(int visibility) {
         setRest.setVisibility(visibility);
         restTime.setVisibility(visibility);
@@ -148,17 +142,7 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
     public void hideViewsOnStart() {
         weightTypes.setVisibility(View.GONE);
         wTypeOther.setVisibility(View.GONE);
-        setsDisplay.setVisibility(View.GONE);
-        sets.setVisibility(View.GONE);
-        repsDisplay.setVisibility(View.GONE);
-        reps.setVisibility(View.GONE);
-        durationDisplay.setVisibility(View.GONE);
-        elapsedHrs.setVisibility(View.GONE);
-        hourDisplay.setVisibility(View.GONE);
-        elapsedMin.setVisibility(View.GONE);
-        minuteDisplay.setVisibility(View.GONE);
-        elapsedSec.setVisibility(View.GONE);
-        secondDisplay.setVisibility(View.GONE);
+        setProgramTypeVisibility(false, false, false);
         toggleExtraSpecifications(View.GONE);
     }
 
@@ -208,8 +192,22 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
     }
 
 
-    private void setProgramVisibility(boolean hasSets, boolean hasReps, boolean hasDuration) {
+    private void setProgramTypeVisibility(boolean hasSets, boolean hasReps, boolean hasDuration) {
+        int setsVis = View.GONE;
+        if(hasSets) { setsVis = View.VISIBLE; }
+        sets.setVisibility(setsVis);
+        setsDisplay.setVisibility(setsVis);
 
+        int repsVis = View.GONE;
+        if(hasReps) { repsVis = View.VISIBLE; }
+        reps.setVisibility(repsVis);
+        repsDisplay.setVisibility(repsVis);
+
+        int durationVis = View.GONE;
+        if(hasDuration) { durationVis = View.VISIBLE; }
+        for(int index = 0; index < durationItems.size(); index++) {
+            durationItems.get(index).setVisibility(durationVis);
+        }
     }
 
     public void onItemSelected(@NonNull AdapterView<?> parent, View v, int pos, long id) {
@@ -243,25 +241,20 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
         }
         else if(parent.getId() == programTypes.getId()) {
             switch (itemSelected) {
+                case "Sets x Reps":
+                    setProgramTypeVisibility(true, true, false);
+                    break;
                 case "Sets x Duration":
-                    setsDisplay.setVisibility(View.VISIBLE);
-                    sets.setVisibility(View.VISIBLE);
-                    repsDisplay.setVisibility(View.GONE);
-                    reps.setVisibility(View.GONE);
+                    setProgramTypeVisibility(true, false, true);
                     break;
                 case "Duration":
-                    setDurationVisibility(View.VISIBLE);
+                    setProgramTypeVisibility(false, false, true);
+                    break;
                 case "1 Rep Max":
-                    setsDisplay.setVisibility(View.GONE);
-                    sets.setVisibility(View.GONE);
-                    repsDisplay.setVisibility(View.GONE);
-                    reps.setVisibility(View.GONE);
+                    setProgramTypeVisibility(false, false, false);
                     break;
                 case "Reps":
-                    setsDisplay.setVisibility(View.GONE);
-                    sets.setVisibility(View.GONE);
-                    repsDisplay.setVisibility(View.VISIBLE);
-                    reps.setVisibility(View.VISIBLE);
+                    setProgramTypeVisibility(false, true, false);
                     break;
             }
         }
