@@ -1,0 +1,100 @@
+<resources>
+    <string name="app_name">Workout Logger</string>
+    <string-array name="exerciseTypes">
+        <item>Weights</item>
+        <item>Bodyweight</item>
+        <item>Weighted</item>
+        <item>Cardio</item>
+    </string-array>
+
+    <string-array name="days">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+
+    <string-array name="intensity">
+        <item>Easy</item>
+        <item>Somewhat Easy</item>
+        <item>Moderate</item>
+        <item>Somewhat Difficult</item>
+        <item>Difficult</item>
+    </string-array>
+
+    <string-array name="numTen">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="programTypes">
+        <item>Sets x Reps</item>
+        <item>Sets x Duration</item>
+        <item>Duration</item>
+        <item>Reps</item>
+        <item>1 Rep Max</item>
+    </string-array>
+
+    <string-array name="timeRange">
+        <item>AM</item>
+        <item>PM</item>
+    </string-array>
+
+    <string-array name="weightTypes">
+        <item>Barbell</item>
+        <item>Dumbbells</item>
+        <item>EZ Bar</item>
+        <item>Kettlebell</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="weightUnits">
+        <item>lbs</item>
+        <item>kgs</item>
+    </string-array>
+
+    <string name ="exercise">Exercise Name</string>
+    <string name ="intensity">Intensity</string>
+    <string name ="weights">Weights</string>
+    <string name ="weight">Weight</string>
+    <string name ="pounds">lbs</string>
+    <string name ="kilograms">kgs</string>
+    <string name ="time">Time</string>
+    <string name ="typeExercise">Exercise Type</string>
+    <string name ="duration">Duration</string>
+    <string name="defaultInput">No Input</string>
+    <string name="hour">hrs</string>
+    <string name="minute">mins</string>
+    <string name="second">secs</string>
+    <string name="other">Other</string>
+
+    <string name="sets">Sets</string>
+    <string name="reps">Reps</string>
+
+    <string name="digitsHour">hh</string>
+    <string name="digitsMinute">mm</string>
+    <string name="digitsSecond">ss</string>
+
+    <string name="weightType">Weight Type</string>
+    <string name="hrsAndMins">hh:mm</string>
+    <string name="minAndSec">mm:ss</string>
+    <string name="setRest">Rest Between Sets</string>
+    <string name="date">Date</string>
+    <string name="rpe">RPE</string>
+    <string name="specs">More Specifications</string>
+    <string name="weightDetails">%s %s %s %s</string>
+    <string name="weightText">%1s %2s</string>
+    <string name="programNumbers">%s %s %s %s %s</string>
+    <string name="programType">Program Type</string>
+</resources>
