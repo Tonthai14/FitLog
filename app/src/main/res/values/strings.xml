@@ -46,7 +46,7 @@
         <item>1 Rep Max</item>
     </string-array>
 
-    <string-array name="timeRange">
+    <string-array name="timeAM_PM">
         <item>AM</item>
         <item>PM</item>
     </string-array>
@@ -66,7 +66,6 @@
 
     <string name ="exercise">Exercise Name</string>
     <string name ="intensity">Intensity</string>
-    <string name ="weights">Weights</string>
     <string name ="weight">Weight</string>
     <string name ="pounds">lbs</string>
     <string name ="kilograms">kgs</string>
@@ -74,6 +73,7 @@
     <string name ="typeExercise">Exercise Type</string>
     <string name ="duration">Duration</string>
     <string name="defaultInput">No Input</string>
+
     <string name="hour">hrs</string>
     <string name="minute">mins</string>
     <string name="second">secs</string>
@@ -86,13 +86,15 @@
     <string name="digitsMinute">mm</string>
     <string name="digitsSecond">ss</string>
 
+    <string name="addSpecification">Add Specification</string>
     <string name="weightType">Weight Type</string>
-    <string name="hrsAndMins">hh:mm</string>
-    <string name="minAndSec">mm:ss</string>
     <string name="setRest">Rest Between Sets</string>
     <string name="date">Date</string>
     <string name="rpe">RPE</string>
     <string name="specs">More Specifications</string>
+    <string name="oneRepMax">1 Rep Max</string>
+
+    <string name="addSpace">%s %s</string>
     <string name="weightDetails">%s %s %s %s</string>
     <string name="weightText">%1s %2s</string>
     <string name="programNumbers">%s %s %s %s %s</string>

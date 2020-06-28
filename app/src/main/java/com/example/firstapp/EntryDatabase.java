@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntryDatabase extends SQLiteOpenHelper {
-    private static int DATABASE_VERSION = 7;
+    private static int DATABASE_VERSION = 9;
     private static final String DATABASE_NAME = "EntryDB";
     private static final String TABLE_NAME = "EntryTable";
 
@@ -31,7 +31,12 @@ public class EntryDatabase extends SQLiteOpenHelper {
     private static final String KEY_ELAPSED_HRS = "elapsedHrs";
     private static final String KEY_ELAPSED_MIN = "elapsedMin";
     private static final String KEY_ELAPSED_SEC = "elapsedSec";
-    private static final String KEY_DATE_TIME = "dateTime";
+    private static final String KEY_REST_MIN = "restMin";
+    private static final String KEY_REST_SEC = "restSec";
+    private static final String KEY_RPE = "rpe";
+    private static final String KEY_DATE_HRS = "dateHrs";
+    private static final String KEY_DATE_MIN = "dateMin";
+    private static final String KEY_AM_PM = "AM_PM";
 
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_NAME + " (" +
@@ -48,7 +53,12 @@ public class EntryDatabase extends SQLiteOpenHelper {
                 KEY_ELAPSED_HRS + " TEXT," +
                 KEY_ELAPSED_MIN + " TEXT," +
                 KEY_ELAPSED_SEC + " TEXT," +
-                KEY_DATE_TIME + " TEXT"
+                KEY_REST_MIN + " TEXT," +
+                KEY_REST_SEC + " TEXT," +
+                KEY_RPE + " TEXT," +
+                KEY_DATE_HRS + " TEXT," +
+                KEY_DATE_MIN + " TEXT," +
+                KEY_AM_PM + " TEXT"
                 + " )";
         db.execSQL(query);
     }
@@ -76,7 +86,12 @@ public class EntryDatabase extends SQLiteOpenHelper {
         cv.put(KEY_ELAPSED_HRS, entry.getElapsedHrs());
         cv.put(KEY_ELAPSED_MIN, entry.getElapsedMin());
         cv.put(KEY_ELAPSED_SEC, entry.getElapsedSec());
-        cv.put(KEY_DATE_TIME, entry.getDateTime());
+        cv.put(KEY_REST_MIN, entry.getRestMin());
+        cv.put(KEY_REST_SEC, entry.getRestSec());
+        cv.put(KEY_RPE, entry.getRpe());
+        cv.put(KEY_DATE_HRS, entry.getDateHrs());
+        cv.put(KEY_DATE_MIN, entry.getDateMin());
+        cv.put(KEY_AM_PM, entry.getAM_PM());
         // Return ID
         return db.insert(TABLE_NAME, null, cv);
     }
@@ -86,7 +101,8 @@ public class EntryDatabase extends SQLiteOpenHelper {
         String[] query = new String[]
                 {KEY_ID, KEY_EXERCISE, KEY_INTENSITY, KEY_EXERCISE_TYPE, KEY_WEIGHT,
                         KEY_WEIGHT_UNIT, KEY_WEIGHT_TYPE, KEY_PROGRAM_TYPE, KEY_SETS, KEY_REPS,
-                        KEY_ELAPSED_HRS, KEY_ELAPSED_MIN, KEY_ELAPSED_SEC, KEY_DATE_TIME};
+                        KEY_ELAPSED_HRS, KEY_ELAPSED_MIN, KEY_ELAPSED_SEC, KEY_REST_MIN, KEY_REST_SEC,
+                        KEY_RPE, KEY_DATE_HRS, KEY_DATE_MIN, KEY_AM_PM};
         @SuppressLint("Recycle") Cursor cursor = db.query(TABLE_NAME, query, KEY_ID + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
         if(cursor != null) {
@@ -107,7 +123,12 @@ public class EntryDatabase extends SQLiteOpenHelper {
                 cursor.getString(10),
                 cursor.getString(11),
                 cursor.getString(12),
-                cursor.getString(13));
+                cursor.getString(13),
+                cursor.getString(14),
+                cursor.getString(15),
+                cursor.getString(16),
+                cursor.getString(17),
+                cursor.getString(18));
     }
 
     public List<Entry> getAllEntries() {
@@ -131,7 +152,12 @@ public class EntryDatabase extends SQLiteOpenHelper {
                 entry.setElapsedHrs(cursor.getString(10));
                 entry.setElapsedMin(cursor.getString(11));
                 entry.setElapsedSec(cursor.getString(12));
-                entry.setDateTime(cursor.getString(13));
+                entry.setRestMin(cursor.getString(13));
+                entry.setRestSec(cursor.getString(14));
+                entry.setRpe(cursor.getString(15));
+                entry.setDateHrs(cursor.getString(16));
+                entry.setDateMin(cursor.getString(17));
+                entry.setAM_PM(cursor.getString(18));
                 allEntries.add(entry);
             } while(cursor.moveToNext());
         }
@@ -153,8 +179,12 @@ public class EntryDatabase extends SQLiteOpenHelper {
         cv.put(KEY_ELAPSED_HRS, entry.getElapsedHrs());
         cv.put(KEY_ELAPSED_MIN, entry.getElapsedMin());
         cv.put(KEY_ELAPSED_SEC, entry.getElapsedSec());
-        cv.put(KEY_DATE_TIME, entry.getDateTime());
-
+        cv.put(KEY_REST_MIN, entry.getRestMin());
+        cv.put(KEY_REST_SEC, entry.getRestSec());
+        cv.put(KEY_RPE, entry.getRpe());
+        cv.put(KEY_DATE_HRS, entry.getDateHrs());
+        cv.put(KEY_DATE_MIN, entry.getDateMin());
+        cv.put(KEY_AM_PM, entry.getAM_PM());
         return db.update(TABLE_NAME, cv, KEY_ID + "=?",
                 new String[]{String.valueOf(entry.getId())});
     }

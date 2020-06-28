@@ -63,7 +63,7 @@
                     app:layout_constraintVertical_bias="0.0" />
 
                 <Spinner
-                    android:id="@+id/intensityTypes"
+                    android:id="@+id/intensity"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:entries="@array/intensity"
@@ -125,7 +125,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/wTypeOther"
+                    android:id="@+id/weightTypeOther"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:autofillHints="weightType"
@@ -176,27 +176,50 @@
                 <Spinner
                     android:id="@+id/programTypes"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="40dp"
+                    android:gravity="end"
                     android:entries="@array/programTypes"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/textView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:text="@string/programType"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/sets"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
                     android:autofillHints="@string/sets"
                     android:ems="2"
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="3"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/programTypes"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"
                     tools:ignore="LabelFor" />
 
                 <TextView
@@ -215,8 +238,8 @@
                     android:id="@+id/reps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
                     android:autofillHints="@string/reps"
                     android:ems="2"
                     android:gravity="center"
@@ -236,10 +259,9 @@
                     android:text="@string/reps"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/reps"
                     app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -276,7 +298,7 @@
                     app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
-                    android:id="@+id/hourDisplay"
+                    android:id="@+id/elapsedHrsDisplay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -297,12 +319,12 @@
                     android:hint="@string/digitsMinute"
                     android:inputType="number"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/hourDisplay"
+                    app:layout_constraintStart_toEndOf="@+id/elapsedHrsDisplay"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
-                    android:id="@+id/minuteDisplay"
+                    android:id="@+id/elapsedMinDisplay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -323,12 +345,12 @@
                     android:hint="@string/digitsSecond"
                     android:inputType="number"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/minuteDisplay"
+                    app:layout_constraintStart_toEndOf="@+id/elapsedMinDisplay"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
-                    android:id="@+id/secondDisplay"
+                    android:id="@+id/elapsedSecDisplay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -351,10 +373,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/setRest"
+                    android:id="@+id/restDisplay"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:layout_marginStart="5dp"
@@ -367,6 +389,64 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/restMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:autofillHints="@string/setRest"
+                    android:hint="@string/digitsMinute"
+                    android:inputType="number"
+                    android:maxLength="5"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/restDisplay"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/restMinDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/minute"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/restMin"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/restSec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:autofillHints="@string/second"
+                    android:hint="@string/digitsSecond"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/restMinDisplay"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/restSecDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/second"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/restSec"
+                    app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -405,7 +485,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/dateDisplay"
@@ -423,29 +503,72 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/dateTime"
+                    android:id="@+id/dateHrs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:autofillHints="@string/date"
-                    android:hint="@string/hrsAndMins"
-                    android:inputType="datetime"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:autofillHints="@string/hour"
+                    android:hint="@string/digitsHour"
+                    android:inputType="number"
+                    android:maxLength="2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/dateDisplay"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
 
+                <TextView
+                    android:id="@+id/dateHrsDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/hour"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/dateHrs"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/dateMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:autofillHints="@string/minute"
+                    android:hint="@string/digitsMinute"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/dateHrsDisplay"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/dateMinDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/minute"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/dateMin"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <Spinner
-                    android:id="@+id/timeRange"
+                    android:id="@+id/timeAM_PM"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
-                    android:entries="@array/timeRange"
+                    android:entries="@array/timeAM_PM"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/dateTime"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/dateMinDisplay"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

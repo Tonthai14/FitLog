@@ -27,14 +27,30 @@ import java.util.List;
 import java.util.Objects;
 
 public class addExercise extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    EditText exercise, weight, wTypeOther, sets, reps, elapsedHrs, elapsedMin, elapsedSec, dateTime,
-            restTime;
-    Spinner intensity, exerciseTypes, weightUnits, weightTypes, programTypes, rpe, timeRange;
-    TextView setsDisplay, repsDisplay, durationDisplay, hourDisplay, minuteDisplay, secondDisplay,
-            setRest, rpeDisplay, dateDisplay;
+    EditText exercise,
+            weight, weightTypeOther,
+            sets, reps,
+            elapsedHrs, elapsedMin, elapsedSec,
+            restMin, restSec,
+            dateHrs, dateMin;
+    Spinner intensity,
+            exerciseTypes,
+            weightUnits,
+            weightTypes,
+            programTypes,
+            rpe,
+            timeAM_PM;
+    TextView setsDisplay, repsDisplay,
+            durationDisplay, elapsedHrsDisplay, elapsedMinDisplay, elapsedSecDisplay,
+            restDisplay, restMinDisplay, restSecDisplay,
+            rpeDisplay,
+            dateDisplay, dateHrsDisplay, dateMinDisplay;
     Switch moreSpecifications;
 
-    List<TextView> durationItems;
+    List<TextView> durationItems, extraSpecifications;
+
+    private void findExtraViews() {
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -59,32 +75,41 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
             public void afterTextChanged(Editable s) {}
         });
         weight = findViewById(R.id.weight);
-        wTypeOther = findViewById(R.id.wTypeOther);
+        weightTypeOther = findViewById(R.id.weightTypeOther);
         sets = findViewById(R.id.sets);
         reps = findViewById(R.id.reps);
         elapsedHrs = findViewById(R.id.elapsedHrs);
         elapsedMin = findViewById(R.id.elapsedMin);
         elapsedSec = findViewById(R.id.elapsedSec);
-        restTime = findViewById(R.id.restTime);
-        dateTime = findViewById(R.id.dateTime);
+        restMin = findViewById(R.id.restMin);
+        restSec = findViewById(R.id.restSec);
+        dateHrs = findViewById(R.id.dateHrs);
+        dateMin = findViewById(R.id.dateMin);
 
         // TextViews
         setsDisplay = findViewById(R.id.setsDisplay);
         repsDisplay = findViewById(R.id.repsDisplay);
         durationDisplay = findViewById(R.id.durationDisplay);
-        hourDisplay = findViewById(R.id.hourDisplay);
-        minuteDisplay = findViewById(R.id.minuteDisplay);
-        secondDisplay = findViewById(R.id.secondDisplay);
-        setRest = findViewById(R.id.setRest);
+        elapsedHrsDisplay = findViewById(R.id.elapsedHrsDisplay);
+        elapsedMinDisplay = findViewById(R.id.elapsedMinDisplay);
+        elapsedSecDisplay = findViewById(R.id.elapsedSecDisplay);
+        restDisplay = findViewById(R.id.restDisplay);
+        restMinDisplay = findViewById(R.id.restMinDisplay);
+        restSecDisplay = findViewById(R.id.restSecDisplay);
         rpeDisplay = findViewById(R.id.rpeDisplay);
         dateDisplay = findViewById(R.id.dateDisplay);
+        dateHrsDisplay = findViewById(R.id.dateHrsDisplay);
+        dateMinDisplay = findViewById(R.id.dateMinDisplay);
 
         // Lists to change visibility of one input group
-        durationItems = Arrays.asList(durationDisplay, elapsedHrs, hourDisplay, elapsedMin,
-                minuteDisplay, elapsedSec, secondDisplay);
+        durationItems = Arrays.asList(durationDisplay, elapsedHrs, elapsedHrsDisplay, elapsedMin,
+                elapsedMinDisplay, elapsedSec, elapsedSecDisplay);
+        extraSpecifications = Arrays.asList(restDisplay, restMin, restMinDisplay, restSec,
+                restSecDisplay, rpeDisplay, dateDisplay, dateHrs, dateHrsDisplay, dateMin,
+                dateMinDisplay);
 
         // Spinners
-        intensity = findViewById(R.id.intensityTypes);
+        intensity = findViewById(R.id.intensity);
         setSpinner(intensity, R.array.intensity);
 
         exerciseTypes = findViewById(R.id.exerciseTypes);
@@ -102,25 +127,24 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
         rpe = findViewById(R.id.rpe);
         setSpinner(rpe, R.array.numTen);
 
-        timeRange = findViewById(R.id.timeRange);
-        setSpinner(timeRange, R.array.timeRange);
+        timeAM_PM = findViewById(R.id.timeAM_PM);
+        setSpinner(timeAM_PM, R.array.timeAM_PM);
 
-        // Switch buttons
+        // Switch button
         moreSpecifications = findViewById(R.id.moreSpecifications);
         moreSpecifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    toggleExtraSpecifications(View.VISIBLE);
+                    setExtraSpecificationsVisibility(View.VISIBLE);
                 } else {
-                    toggleExtraSpecifications(View.GONE);
+                    setExtraSpecificationsVisibility(View.GONE);
                 }
             }
         });
-        hideViewsOnStart();
     }
 
-    public void setSpinner(Spinner spinner, int entries) {
+    private void setSpinner(Spinner spinner, int entries) {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this, entries, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -129,21 +153,13 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
         spinner.setOnItemSelectedListener(this);
     }
 
-    public void toggleExtraSpecifications(int visibility) {
-        setRest.setVisibility(visibility);
-        restTime.setVisibility(visibility);
-        rpeDisplay.setVisibility(visibility);
+    private void setExtraSpecificationsVisibility(int visibility) {
+        for(int index = 0; index < extraSpecifications.size(); index++) {
+            extraSpecifications.get(index).setVisibility(visibility);
+        }
+        // Spinners
         rpe.setVisibility(visibility);
-        dateDisplay.setVisibility(visibility);
-        dateTime.setVisibility(visibility);
-        timeRange.setVisibility(visibility);
-    }
-
-    public void hideViewsOnStart() {
-        weightTypes.setVisibility(View.GONE);
-        wTypeOther.setVisibility(View.GONE);
-        setProgramTypeVisibility(false, false, false);
-        toggleExtraSpecifications(View.GONE);
+        timeAM_PM.setVisibility(visibility);
     }
 
     @Override
@@ -176,7 +192,12 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
                     elapsedHrs.getText().toString(),
                     elapsedMin.getText().toString(),
                     elapsedSec.getText().toString(),
-                    dateTime.getText().toString());
+                    restMin.getText().toString(),
+                    restSec.getText().toString(),
+                    checkSpinnerContent(rpe),
+                    dateHrs.getText().toString(),
+                    dateMin.getText().toString(),
+                    checkSpinnerContent(timeAM_PM));
             EntryDatabase db = new EntryDatabase(this);
             long id = db.addEntry(entry);
             Entry confirm = db.getEntry(id);
@@ -190,7 +211,6 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
     public void onBackPressed() {
         super.onBackPressed();
     }
-
 
     private void setProgramTypeVisibility(boolean hasSets, boolean hasReps, boolean hasDuration) {
         int setsVis = View.GONE;
@@ -234,9 +254,9 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
         }
         else if(parent.getId() == weightTypes.getId()) {
             if(itemSelected.equals("Other")) {
-                wTypeOther.setVisibility(View.VISIBLE);
+                weightTypeOther.setVisibility(View.VISIBLE);
             } else {
-                wTypeOther.setVisibility(View.GONE);
+                weightTypeOther.setVisibility(View.GONE);
             }
         }
         else if(parent.getId() == programTypes.getId()) {

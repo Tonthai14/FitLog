@@ -9,14 +9,26 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.Objects;
 
 public class Details extends AppCompatActivity {
-    TextView intensity, weight, exerciseType, programTypes, programNumbers, dateTime;
+    TextView intensity,
+            weight,
+            weightTypeDisplay, weightType,
+            exerciseType,
+            programTypes, programNumbers, // Includes Sets, Reps, and Duration
+            rpeDisplay, rpe,
+            dateTimeDisplay, dateTime;
     long id;
+
+    enum extraSpecs {
+        WEIGHTS,
+        RPE,
+        DATE
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -33,35 +45,89 @@ public class Details extends AppCompatActivity {
         Entry entry = db.getEntry(id);
         Objects.requireNonNull(getSupportActionBar()).setTitle(entry.getExercise());
 
-        intensity = findViewById(R.id.intensityTypes);
+        // TextViews
+        intensity = findViewById(R.id.intensity);
         exerciseType = findViewById(R.id.exerciseTypes);
         weight = findViewById(R.id.weight);
-        dateTime = findViewById(R.id.dateTime);
+        weightTypeDisplay = findViewById(R.id.weightTypeDisplay);
+        weightType = findViewById(R.id.weightType);
         programTypes = findViewById(R.id.programDisplay);
         programNumbers = findViewById(R.id.programNumbers);
+        rpeDisplay = findViewById(R.id.rpeDisplay);
+        rpe = findViewById(R.id.rpe);
+        dateTimeDisplay = findViewById(R.id.dateTimeDisplay);
+        dateTime = findViewById(R.id.dateTime);
 
         checkHasInput(intensity, entry.getIntensity());
         checkHasInput(exerciseType, entry.getExerciseType());
-        checkHasInput(dateTime, entry.getDateTime());
+
+        boolean hasWeights = checkHasInput(weightType, entry.getWeightType());
+        boolean hasRPE = checkHasInput(rpe, entry.getRpe());
+        boolean hasDate =
+                checkHasInput(dateTime, entry.getDateHrs()) ||
+                checkHasInput(dateTime, entry.getDateMin());
+
+        boolean[] specsVisibility = new boolean[]{ hasWeights, hasRPE, hasDate };
+        int index = 0;
+        for(extraSpecs spec : extraSpecs.values()) {
+            int visible = View.GONE;
+            if(specsVisibility[index]) { visible = View.VISIBLE; }
+            switch (spec) {
+                case WEIGHTS:
+                    weightTypeDisplay.setVisibility(visible);
+                    weightType.setVisibility(visible);
+                    break;
+                case RPE:
+                    rpeDisplay.setVisibility(visible);
+                    rpe.setVisibility(visible);
+                    break;
+                case DATE:
+                    dateTimeDisplay.setVisibility(visible);
+                    dateTime.setVisibility(visible);
+                    break;
+            }
+            index++;
+        }
+
         checkHasInput(programTypes, entry.getProgramType());
         weight.setText(getString(R.string.weightText, entry.getWeight(), entry.getWeightUnit()));
-
-
-        if(!entry.getSets().isEmpty() && !entry.getReps().isEmpty()) {
-            programNumbers.setText(getString(
-                    R.string.programNumbers, entry.getSets(), "x", entry.getReps(),"",""));
-        } else if(!entry.getSets().isEmpty()) {
-            programNumbers.setText(getString(
-                    R.string.programNumbers, entry.getSets(),"","","",""));
-        } else if(!entry.getReps().isEmpty()) {
-            programNumbers.setText(getString(
-                    R.string.programNumbers, entry.getReps(),"","","",""));
-        }
+        displayProgramType(entry);
     }
 
-    public void checkHasInput(TextView item, String text) {
+    private boolean checkHasInput(TextView item, String text) {
         if(!text.isEmpty()) {
+            if(!item.getText().equals("")) {
+                item.setText(getString(R.string.addSpace, item.getText(), " "));
+            }
             item.setText(text);
+            return true;
+        }
+        return false;
+    }
+
+    private void displayProgramType(Entry entry) {
+        switch(entry.getProgramType()) {
+            case "Sets x Reps":
+                programNumbers.setText(getString(R.string.programNumbers,
+                        "", entry.getSets(), "x", entry.getReps(), ""));
+                break;
+            case "Sets x Duration":
+                programNumbers.setText(getString(R.string.programNumbers,
+                        entry.getSets(), "x", entry.getElapsedHrs(),
+                        entry.getElapsedMin(), entry.getElapsedSec()));
+                break;
+            case "Duration":
+                checkHasInput(programNumbers, entry.getElapsedHrs());
+                checkHasInput(programNumbers, entry.getElapsedMin());
+                checkHasInput(programNumbers, entry.getElapsedSec());
+                break;
+            case "Reps":
+                programNumbers.setText(getString(R.string.programNumbers,
+                        "", entry.getReps(), "reps", "", ""));
+                break;
+            case "1 Rep Max":
+                programNumbers.setText(getString(R.string.oneRepMax));
+                break;
         }
     }
 

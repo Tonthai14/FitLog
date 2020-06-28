@@ -14,11 +14,17 @@ public class Entry {
     private String elapsedHrs;
     private String elapsedMin;
     private String elapsedSec;
-    private String dateTime;
+    private String restMin;
+    private String restSec;
+    private String rpe;
+    private String dateHrs;
+    private String dateMin;
+    private String AM_PM;
 
     Entry(String exercise, String intensity, String exerciseType, String weight, String weightUnit,
-          String weightType, String programType, String sets, String reps,
-          String elapsedHrs, String elapsedMin, String elapsedSec, String dateTime) {
+          String weightType, String programType, String sets, String reps, String elapsedHrs,
+          String elapsedMin, String elapsedSec, String restMin, String restSec, String rpe,
+          String dateHrs, String dateMin, String AM_PM) {
         this.exercise = exercise;
         this.intensity = intensity;
         this.exerciseType = exerciseType;
@@ -31,12 +37,18 @@ public class Entry {
         this.elapsedHrs = elapsedHrs;
         this.elapsedMin = elapsedMin;
         this.elapsedSec = elapsedSec;
-        this.dateTime = dateTime;
+        this.restMin = restMin;
+        this.restSec = restSec;
+        this.rpe = rpe;
+        this.dateHrs = dateHrs;
+        this.dateMin = dateMin;
+        this.AM_PM = AM_PM;
     }
 
     Entry(long id, String exercise, String intensity, String exerciseType, String weight,
-          String weightUnit, String weightType, String programType, String sets,
-          String reps, String elapsedHrs, String elapsedMin, String elapsedSec, String dateTime) {
+          String weightUnit, String weightType, String programType, String sets, String reps,
+          String elapsedHrs, String elapsedMin, String elapsedSec, String restMin, String restSec,
+          String rpe, String dateHrs, String dateMin, String AM_PM) {
         this.id = id;
         this.exercise = exercise;
         this.intensity = intensity;
@@ -50,7 +62,12 @@ public class Entry {
         this.elapsedHrs = elapsedHrs;
         this.elapsedMin = elapsedMin;
         this.elapsedSec = elapsedSec;
-        this.dateTime = dateTime;
+        this.restMin = restMin;
+        this.restSec = restSec;
+        this.rpe = rpe;
+        this.dateHrs = dateHrs;
+        this.dateMin = dateMin;
+        this.AM_PM = AM_PM;
     }
 
     Entry() {}
@@ -58,7 +75,6 @@ public class Entry {
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -66,7 +82,6 @@ public class Entry {
     public String getExercise() {
         return exercise;
     }
-
     public void setExercise(String exercise) {
         this.exercise = exercise;
     }
@@ -74,7 +89,6 @@ public class Entry {
     public String getIntensity() {
         return intensity;
     }
-
     public void setIntensity(String intensity) {
         this.intensity = intensity;
     }
@@ -82,52 +96,56 @@ public class Entry {
     public String getWeight() {
         return weight;
     }
-
     public void setWeight(String weight) {
         this.weight = weight;
     }
 
     public String getWeightUnit() { return weightUnit; }
-
     public void setWeightUnit(String weightUnit) { this.weightUnit = weightUnit; }
 
     public String getWeightType() { return weightType; }
-
     public void setWeightType(String weightType) { this.weightType = weightType; }
 
     public String getProgramType() { return programType; }
-
     public void setProgramType(String programType) { this.programType = programType; }
 
     public String getSets() {
         return sets;
     }
-
     public void setSets(String sets) {
         this.sets = sets;
     }
 
     public String getReps() { return reps; }
-
     public void setReps(String reps) { this.reps = reps; }
 
     public String getExerciseType() { return exerciseType;}
-
     public void setExerciseType(String exerciseType) { this.exerciseType = exerciseType;}
 
     public String getElapsedHrs() { return elapsedHrs; }
-
     public void setElapsedHrs(String elapsedHrs) { this.elapsedHrs = elapsedHrs; }
 
     public String getElapsedMin() { return elapsedMin; }
-
     public void setElapsedMin(String elapsedMin) { this.elapsedMin = elapsedMin; }
 
     public String getElapsedSec() { return elapsedSec; }
-
     public void setElapsedSec(String elapsedSec) { this.elapsedSec = elapsedSec; }
 
-    public String getDateTime() { return dateTime; }
+    public String getRestMin() { return restMin; }
+    public void setRestMin(String restMin) { this.restMin = restMin; }
 
-    public void setDateTime(String dateTime) { this.dateTime = dateTime; }
+    public String getRestSec() { return restSec; }
+    public void setRestSec(String restSec) { this.restSec = restSec; }
+
+    public String getRpe() { return rpe; }
+    public void setRpe(String rpe) { this.rpe = rpe;}
+
+    public String getDateHrs() { return dateHrs; }
+    public void setDateHrs(String dateHrs) { this.dateHrs = dateHrs; }
+
+    public String getDateMin() { return dateMin; }
+    public void setDateMin(String dateMin) { this.dateMin = dateMin; }
+
+    public String getAM_PM() { return AM_PM; }
+    public void setAM_PM(String AM_PM) { this.AM_PM = AM_PM; }
 }

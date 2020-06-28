@@ -3,6 +3,6 @@
     style="?android:attr/spinnerItemStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:singleLine="true"
     android:ellipsize="marquee"
-    android:text="Select One"/>
+    android:singleLine="true"
+    android:text="Select One" />
