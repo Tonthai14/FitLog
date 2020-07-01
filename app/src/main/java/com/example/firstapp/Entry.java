@@ -8,6 +8,7 @@ public class Entry {
     private String weight;
     private String weightUnit; // Unit of Measurement, e.g. lbs or kgs
     private String weightType; // e.g. Barbell
+    private String weightTypeOther;
     private String programType; // e.g. Sets and Reps
     private String sets;
     private String reps;
@@ -22,15 +23,16 @@ public class Entry {
     private String AM_PM;
 
     Entry(String exercise, String intensity, String exerciseType, String weight, String weightUnit,
-          String weightType, String programType, String sets, String reps, String elapsedHrs,
-          String elapsedMin, String elapsedSec, String restMin, String restSec, String rpe,
-          String dateHrs, String dateMin, String AM_PM) {
+          String weightType, String weightTypeOther, String programType, String sets, String reps,
+          String elapsedHrs, String elapsedMin, String elapsedSec, String restMin, String restSec,
+          String rpe, String dateHrs, String dateMin, String AM_PM) {
         this.exercise = exercise;
         this.intensity = intensity;
         this.exerciseType = exerciseType;
         this.weight = weight;
         this.weightUnit  = weightUnit;
         this.weightType = weightType;
+        this.weightTypeOther = weightTypeOther;
         this.programType = programType;
         this.sets = sets;
         this.reps = reps;
@@ -46,9 +48,9 @@ public class Entry {
     }
 
     Entry(long id, String exercise, String intensity, String exerciseType, String weight,
-          String weightUnit, String weightType, String programType, String sets, String reps,
-          String elapsedHrs, String elapsedMin, String elapsedSec, String restMin, String restSec,
-          String rpe, String dateHrs, String dateMin, String AM_PM) {
+          String weightUnit, String weightType, String weightTypeOther, String programType,
+          String sets, String reps, String elapsedHrs, String elapsedMin, String elapsedSec,
+          String restMin, String restSec, String rpe, String dateHrs, String dateMin, String AM_PM) {
         this.id = id;
         this.exercise = exercise;
         this.intensity = intensity;
@@ -56,6 +58,7 @@ public class Entry {
         this.weight = weight;
         this.weightUnit = weightUnit;
         this.weightType = weightType;
+        this.weightTypeOther = weightTypeOther;
         this.programType = programType;
         this.sets = sets;
         this.reps = reps;
@@ -105,6 +108,9 @@ public class Entry {
 
     public String getWeightType() { return weightType; }
     public void setWeightType(String weightType) { this.weightType = weightType; }
+
+    public String getWeightTypeOther() { return weightTypeOther; }
+    public void setWeightTypeOther(String weightTypeOther) { this.weightTypeOther = weightTypeOther; }
 
     public String getProgramType() { return programType; }
     public void setProgramType(String programType) { this.programType = programType; }

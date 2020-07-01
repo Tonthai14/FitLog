@@ -98,10 +98,10 @@
                     app:layout_constraintVertical_bias="0.0" />
 
                 <Spinner
-                    android:id="@+id/exerciseTypes"
+                    android:id="@+id/exerciseType"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:entries="@array/exerciseTypes"
+                    android:entries="@array/exerciseType"
                     android:gravity="end"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -116,10 +116,10 @@
                 android:layout_height="wrap_content">
 
                 <Spinner
-                    android:id="@+id/weightTypes"
+                    android:id="@+id/weightType"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
-                    android:entries="@array/weightTypes"
+                    android:entries="@array/weightType"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -134,7 +134,7 @@
                     android:inputType="textPersonName"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/weightTypes"
+                    app:layout_constraintStart_toEndOf="@+id/weightType"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -151,17 +151,17 @@
                     android:hint="@string/weight"
                     android:inputType="number"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/weightUnits"
+                    app:layout_constraintEnd_toStartOf="@+id/weightUnit"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
 
                 <Spinner
-                    android:id="@+id/weightUnits"
+                    android:id="@+id/weightUnit"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
-                    android:entries="@array/weightUnits"
+                    android:entries="@array/weightUnit"
                     android:gravity="end"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -174,11 +174,11 @@
                 android:layout_height="wrap_content">
 
                 <Spinner
-                    android:id="@+id/programTypes"
+                    android:id="@+id/programType"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
+                    android:entries="@array/programType"
                     android:gravity="end"
-                    android:entries="@array/programTypes"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -399,6 +399,7 @@
                     android:autofillHints="@string/setRest"
                     android:hint="@string/digitsMinute"
                     android:inputType="number"
+                    android:gravity="center"
                     android:maxLength="5"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -474,7 +475,7 @@
                     android:layout_height="45dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginLeft="20dp"
-                    android:entries="@array/numTen"
+                    android:entries="@array/rpe"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -539,6 +540,7 @@
                     android:hint="@string/digitsMinute"
                     android:inputType="number"
                     android:maxLength="2"
+                    android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/dateHrsDisplay"
                     app:layout_constraintTop_toTopOf="parent"
@@ -557,7 +559,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Spinner
-                    android:id="@+id/timeAM_PM"
+                    android:id="@+id/partOfDay"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:layout_marginStart="10dp"

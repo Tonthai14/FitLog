@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntryDatabase extends SQLiteOpenHelper {
-    private static int DATABASE_VERSION = 9;
+    private static int DATABASE_VERSION = 10;
     private static final String DATABASE_NAME = "EntryDB";
     private static final String TABLE_NAME = "EntryTable";
 
@@ -25,6 +25,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
     private static final String KEY_WEIGHT = "weight";
     private static final String KEY_WEIGHT_UNIT = "weightUnit";
     private static final String KEY_WEIGHT_TYPE = "weightType";
+    private static final String KEY_WEIGHT_TYPE_OTHER = "weightTypeOther";
     private static final String KEY_PROGRAM_TYPE = "programType";
     private static final String KEY_SETS = "sets";
     private static final String KEY_REPS = "reps";
@@ -47,6 +48,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
                 KEY_WEIGHT + " TEXT," +
                 KEY_WEIGHT_UNIT + " TEXT," +
                 KEY_WEIGHT_TYPE + " TEXT," +
+                KEY_WEIGHT_TYPE_OTHER + " TEXT," +
                 KEY_PROGRAM_TYPE + " TEXT," +
                 KEY_SETS + " TEXT," +
                 KEY_REPS + " TEXT," +
@@ -80,6 +82,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
         cv.put(KEY_WEIGHT, entry.getWeight());
         cv.put(KEY_WEIGHT_UNIT, entry.getWeightUnit());
         cv.put(KEY_WEIGHT_TYPE, entry.getWeightType());
+        cv.put(KEY_WEIGHT_TYPE_OTHER, entry.getWeightTypeOther());
         cv.put(KEY_PROGRAM_TYPE, entry.getProgramType());
         cv.put(KEY_SETS, entry.getSets());
         cv.put(KEY_REPS, entry.getReps());
@@ -100,9 +103,9 @@ public class EntryDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] query = new String[]
                 {KEY_ID, KEY_EXERCISE, KEY_INTENSITY, KEY_EXERCISE_TYPE, KEY_WEIGHT,
-                        KEY_WEIGHT_UNIT, KEY_WEIGHT_TYPE, KEY_PROGRAM_TYPE, KEY_SETS, KEY_REPS,
-                        KEY_ELAPSED_HRS, KEY_ELAPSED_MIN, KEY_ELAPSED_SEC, KEY_REST_MIN, KEY_REST_SEC,
-                        KEY_RPE, KEY_DATE_HRS, KEY_DATE_MIN, KEY_AM_PM};
+                        KEY_WEIGHT_UNIT, KEY_WEIGHT_TYPE, KEY_WEIGHT_TYPE_OTHER, KEY_PROGRAM_TYPE,
+                        KEY_SETS, KEY_REPS, KEY_ELAPSED_HRS, KEY_ELAPSED_MIN, KEY_ELAPSED_SEC,
+                        KEY_REST_MIN, KEY_REST_SEC, KEY_RPE, KEY_DATE_HRS, KEY_DATE_MIN, KEY_AM_PM};
         @SuppressLint("Recycle") Cursor cursor = db.query(TABLE_NAME, query, KEY_ID + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
         if(cursor != null) {
@@ -128,7 +131,8 @@ public class EntryDatabase extends SQLiteOpenHelper {
                 cursor.getString(15),
                 cursor.getString(16),
                 cursor.getString(17),
-                cursor.getString(18));
+                cursor.getString(18),
+                cursor.getString(19));
     }
 
     public List<Entry> getAllEntries() {
@@ -146,18 +150,19 @@ public class EntryDatabase extends SQLiteOpenHelper {
                 entry.setWeight(cursor.getString(4));
                 entry.setWeightUnit(cursor.getString(5));
                 entry.setWeightType(cursor.getString(6));
-                entry.setProgramType(cursor.getString(7));
-                entry.setSets(cursor.getString(8));
-                entry.setReps(cursor.getString(9));
-                entry.setElapsedHrs(cursor.getString(10));
-                entry.setElapsedMin(cursor.getString(11));
-                entry.setElapsedSec(cursor.getString(12));
-                entry.setRestMin(cursor.getString(13));
-                entry.setRestSec(cursor.getString(14));
-                entry.setRpe(cursor.getString(15));
-                entry.setDateHrs(cursor.getString(16));
-                entry.setDateMin(cursor.getString(17));
-                entry.setAM_PM(cursor.getString(18));
+                entry.setWeightTypeOther(cursor.getString(7));
+                entry.setProgramType(cursor.getString(8));
+                entry.setSets(cursor.getString(9));
+                entry.setReps(cursor.getString(10));
+                entry.setElapsedHrs(cursor.getString(11));
+                entry.setElapsedMin(cursor.getString(12));
+                entry.setElapsedSec(cursor.getString(13));
+                entry.setRestMin(cursor.getString(14));
+                entry.setRestSec(cursor.getString(15));
+                entry.setRpe(cursor.getString(16));
+                entry.setDateHrs(cursor.getString(17));
+                entry.setDateMin(cursor.getString(18));
+                entry.setAM_PM(cursor.getString(19));
                 allEntries.add(entry);
             } while(cursor.moveToNext());
         }
@@ -173,6 +178,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
         cv.put(KEY_WEIGHT, entry.getWeight());
         cv.put(KEY_WEIGHT_UNIT, entry.getWeightUnit());
         cv.put(KEY_WEIGHT_TYPE, entry.getWeightType());
+        cv.put(KEY_WEIGHT_TYPE_OTHER, entry.getWeightTypeOther());
         cv.put(KEY_PROGRAM_TYPE, entry.getProgramType());
         cv.put(KEY_SETS, entry.getSets());
         cv.put(KEY_REPS, entry.getReps());

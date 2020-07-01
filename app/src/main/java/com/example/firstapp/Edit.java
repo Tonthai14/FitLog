@@ -31,10 +31,10 @@ public class Edit extends AppCompatActivity implements AdapterView.OnItemSelecte
             restMin, restSec,
             dateHrs, dateMin;
     Spinner intensity,
-            exerciseTypes,
-            weightUnits,
-            weightTypes,
-            programTypes,
+            exerciseType,
+            weightUnit,
+            weightType,
+            programType,
             rpe,
             timeAM_PM;
     long id;
@@ -69,29 +69,29 @@ public class Edit extends AppCompatActivity implements AdapterView.OnItemSelecte
         intensity = findViewById(R.id.intensity);
         setSpinner(intensity, R.array.intensity);
 
-        exerciseTypes = findViewById(R.id.exerciseTypes);
-        setSpinner(exerciseTypes, R.array.exerciseTypes);
+        exerciseType = findViewById(R.id.exerciseType);
+        setSpinner(exerciseType, R.array.exerciseType);
 
-        weightUnits = findViewById(R.id.weightUnits);
-        setSpinner(weightUnits, R.array.weightUnits);
+        weightUnit = findViewById(R.id.weightUnit);
+        setSpinner(weightUnit, R.array.weightUnit);
 
-        weightTypes = findViewById(R.id.weightTypes);
-        setSpinner(weightTypes, R.array.weightTypes);
+        weightType = findViewById(R.id.weightType);
+        setSpinner(weightType, R.array.weightType);
 
-        programTypes = findViewById(R.id.programTypes);
-        setSpinner(programTypes, R.array.programTypes);
+        programType = findViewById(R.id.programType);
+        setSpinner(programType, R.array.programType);
 
         rpe = findViewById(R.id.rpe);
-        setSpinner(rpe, R.array.numTen);
+        setSpinner(rpe, R.array.rpe);
 
-        timeAM_PM = findViewById(R.id.timeAM_PM);
+        timeAM_PM = findViewById(R.id.partOfDay);
         setSpinner(timeAM_PM, R.array.timeAM_PM);
 
         final String name = entry.getExercise();
 
         exercise.setText(name);
         weight.setText(entry.getWeight());
-        // TODO: Include weightTypeOther
+        weightTypeOther.setText(entry.getWeightTypeOther());
         sets.setText(entry.getSets());
         reps.setText(entry.getReps());
         elapsedHrs.setText(entry.getElapsedHrs());
@@ -103,9 +103,9 @@ public class Edit extends AppCompatActivity implements AdapterView.OnItemSelecte
         dateMin.setText(entry.getDateMin());
 
         setSpinnerItem(intensity, entry.getIntensity());
-        setSpinnerItem(exerciseTypes, entry.getExerciseType());
-        setSpinnerItem(weightUnits, entry.getWeightType());
-        setSpinnerItem(programTypes, entry.getProgramType());
+        setSpinnerItem(exerciseType, entry.getExerciseType());
+        setSpinnerItem(weightUnit, entry.getWeightType());
+        setSpinnerItem(programType, entry.getProgramType());
         setSpinnerItem(rpe, entry.getRpe());
         setSpinnerItem(timeAM_PM, entry.getAM_PM());
 
@@ -157,11 +157,12 @@ public class Edit extends AppCompatActivity implements AdapterView.OnItemSelecte
             Entry entry = new Entry(id,
                     exercise.getText().toString(),
                     intensity.getSelectedItem().toString(),
-                    exerciseTypes.getSelectedItem().toString(),
+                    exerciseType.getSelectedItem().toString(),
                     weight.getText().toString(),
-                    weightUnits.getSelectedItem().toString(),
-                    weightTypes.getSelectedItem().toString(),
-                    programTypes.getSelectedItem().toString(),
+                    weightUnit.getSelectedItem().toString(),
+                    weightType.getSelectedItem().toString(),
+                    weightTypeOther.getText().toString(),
+                    programType.getSelectedItem().toString(),
                     sets.getText().toString(),
                     reps.getText().toString(),
                     elapsedHrs.getText().toString(),

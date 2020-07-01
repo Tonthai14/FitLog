@@ -34,12 +34,12 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
             restMin, restSec,
             dateHrs, dateMin;
     Spinner intensity,
-            exerciseTypes,
-            weightUnits,
-            weightTypes,
-            programTypes,
+            exerciseType,
+            weightUnit,
+            weightType,
+            programType,
             rpe,
-            timeAM_PM;
+            partOfDay; // AM or PM
     TextView setsDisplay, repsDisplay,
             durationDisplay, elapsedHrsDisplay, elapsedMinDisplay, elapsedSecDisplay,
             restDisplay, restMinDisplay, restSecDisplay,
@@ -47,9 +47,72 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
             dateDisplay, dateHrsDisplay, dateMinDisplay;
     Switch moreSpecifications;
 
-    List<TextView> durationItems, extraSpecifications;
+    List<TextView> durationItems;
 
+    private boolean extraSpecificationsSet = false;
     private void findExtraViews() {
+        // EditTexts
+        restMin = findViewById(R.id.restMin);
+        restSec = findViewById(R.id.restSec);
+        dateHrs = findViewById(R.id.dateHrs);
+        dateMin = findViewById(R.id.dateMin);
+
+        restMin.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(restMin.getText().length() >= 2) {
+                    restSec.requestFocus();
+                }
+            }
+            @Override public void afterTextChanged(Editable s) {}
+        });
+        restSec.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(restSec.getText().length() <= 0) {
+                    restMin.requestFocus();
+                }
+            }
+            @Override public void afterTextChanged(Editable s) {}
+        });
+
+        dateHrs.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(dateHrs.getText().length() >= 2) {
+                    dateMin.requestFocus();
+                }
+            }
+            @Override public void afterTextChanged(Editable s) {}
+        });
+        dateMin.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(dateMin.getText().length() <= 0) {
+                    dateHrs.requestFocus();
+                }
+            }
+            @Override public void afterTextChanged(Editable s) {}
+        });
+
+        // TextViews
+        restDisplay = findViewById(R.id.restDisplay);
+        restMinDisplay = findViewById(R.id.restMinDisplay);
+        restSecDisplay = findViewById(R.id.restSecDisplay);
+        rpeDisplay = findViewById(R.id.rpeDisplay);
+        dateDisplay = findViewById(R.id.dateDisplay);
+        dateHrsDisplay = findViewById(R.id.dateHrsDisplay);
+        dateMinDisplay = findViewById(R.id.dateMinDisplay);
+
+        // Spinners
+        rpe = findViewById(R.id.rpe);
+        setSpinner(rpe, R.array.rpe);
+        partOfDay = findViewById(R.id.partOfDay);
+        setSpinner(partOfDay, R.array.timeAM_PM);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -64,6 +127,15 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
 
         // EditTexts
         exercise = findViewById(R.id.exercise);
+        weight = findViewById(R.id.weight);
+        weightTypeOther = findViewById(R.id.weightTypeOther);
+        sets = findViewById(R.id.sets);
+        reps = findViewById(R.id.reps);
+        elapsedHrs = findViewById(R.id.elapsedHrs);
+        elapsedMin = findViewById(R.id.elapsedMin);
+        elapsedSec = findViewById(R.id.elapsedSec);
+
+        // Set toolbar title to Exercise Name
         exercise.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -74,17 +146,43 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
             @Override
             public void afterTextChanged(Editable s) {}
         });
-        weight = findViewById(R.id.weight);
-        weightTypeOther = findViewById(R.id.weightTypeOther);
-        sets = findViewById(R.id.sets);
-        reps = findViewById(R.id.reps);
-        elapsedHrs = findViewById(R.id.elapsedHrs);
-        elapsedMin = findViewById(R.id.elapsedMin);
-        elapsedSec = findViewById(R.id.elapsedSec);
-        restMin = findViewById(R.id.restMin);
-        restSec = findViewById(R.id.restSec);
-        dateHrs = findViewById(R.id.dateHrs);
-        dateMin = findViewById(R.id.dateMin);
+
+        // Set focus to the next EditText for an input group
+        elapsedHrs.addTextChangedListener(new TextWatcher() { // Duration group
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(elapsedHrs.getText().length() >= 2) {
+                    elapsedMin.requestFocus();
+                }
+            }
+            @Override public void afterTextChanged(Editable s) {}
+        });
+        elapsedMin.addTextChangedListener(new TextWatcher() { // Duration group
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int elapsedMinLength = elapsedMin.getText().length();
+                if(elapsedMinLength >= 2) {
+                    elapsedSec.requestFocus();
+                }
+                else if(elapsedMinLength <= 0) {
+                    elapsedHrs.requestFocus();
+                }
+            }
+            @Override public void afterTextChanged(Editable s) {}
+        });
+        elapsedSec.addTextChangedListener(new TextWatcher() { // Duration group
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(elapsedSec.getText().length() <= 0) {
+                    elapsedMin.requestFocus();
+                }
+            }
+            @Override public void afterTextChanged(Editable s) {}
+        });
+
 
         // TextViews
         setsDisplay = findViewById(R.id.setsDisplay);
@@ -93,42 +191,22 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
         elapsedHrsDisplay = findViewById(R.id.elapsedHrsDisplay);
         elapsedMinDisplay = findViewById(R.id.elapsedMinDisplay);
         elapsedSecDisplay = findViewById(R.id.elapsedSecDisplay);
-        restDisplay = findViewById(R.id.restDisplay);
-        restMinDisplay = findViewById(R.id.restMinDisplay);
-        restSecDisplay = findViewById(R.id.restSecDisplay);
-        rpeDisplay = findViewById(R.id.rpeDisplay);
-        dateDisplay = findViewById(R.id.dateDisplay);
-        dateHrsDisplay = findViewById(R.id.dateHrsDisplay);
-        dateMinDisplay = findViewById(R.id.dateMinDisplay);
 
         // Lists to change visibility of one input group
         durationItems = Arrays.asList(durationDisplay, elapsedHrs, elapsedHrsDisplay, elapsedMin,
                 elapsedMinDisplay, elapsedSec, elapsedSecDisplay);
-        extraSpecifications = Arrays.asList(restDisplay, restMin, restMinDisplay, restSec,
-                restSecDisplay, rpeDisplay, dateDisplay, dateHrs, dateHrsDisplay, dateMin,
-                dateMinDisplay);
 
         // Spinners
         intensity = findViewById(R.id.intensity);
         setSpinner(intensity, R.array.intensity);
-
-        exerciseTypes = findViewById(R.id.exerciseTypes);
-        setSpinner(exerciseTypes, R.array.exerciseTypes);
-
-        weightUnits = findViewById(R.id.weightUnits);
-        setSpinner(weightUnits, R.array.weightUnits);
-
-        weightTypes = findViewById(R.id.weightTypes);
-        setSpinner(weightTypes, R.array.weightTypes);
-
-        programTypes = findViewById(R.id.programTypes);
-        setSpinner(programTypes, R.array.programTypes);
-
-        rpe = findViewById(R.id.rpe);
-        setSpinner(rpe, R.array.numTen);
-
-        timeAM_PM = findViewById(R.id.timeAM_PM);
-        setSpinner(timeAM_PM, R.array.timeAM_PM);
+        exerciseType = findViewById(R.id.exerciseType);
+        setSpinner(exerciseType, R.array.exerciseType);
+        weightUnit = findViewById(R.id.weightUnit);
+        setSpinner(weightUnit, R.array.weightUnit);
+        weightType = findViewById(R.id.weightType);
+        setSpinner(weightType, R.array.weightType);
+        programType = findViewById(R.id.programType);
+        setSpinner(programType, R.array.programType);
 
         // Switch button
         moreSpecifications = findViewById(R.id.moreSpecifications);
@@ -136,6 +214,10 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
+                    if(!extraSpecificationsSet) {
+                        findExtraViews();
+                        extraSpecificationsSet = true;
+                    }
                     setExtraSpecificationsVisibility(View.VISIBLE);
                 } else {
                     setExtraSpecificationsVisibility(View.GONE);
@@ -154,19 +236,15 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
     }
 
     private void setExtraSpecificationsVisibility(int visibility) {
+        List<TextView> extraSpecifications = Arrays.asList(restDisplay, restMin, restMinDisplay,
+                restSec, restSecDisplay, rpeDisplay, dateDisplay, dateHrs, dateHrsDisplay,
+                dateMin, dateMinDisplay);
         for(int index = 0; index < extraSpecifications.size(); index++) {
             extraSpecifications.get(index).setVisibility(visibility);
         }
         // Spinners
         rpe.setVisibility(visibility);
-        timeAM_PM.setVisibility(visibility);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.save_menu, menu);
-        return true;
+        partOfDay.setVisibility(visibility);
     }
 
     public String checkSpinnerContent(Spinner spinner) {
@@ -176,28 +254,80 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
         return spinner.getSelectedItem().toString();
     }
 
+    private String exerciseInput;
+    private String intensityInput;
+    private String exerciseTypeInput;
+    private String weightInput;
+    private String weightUnitInput;
+    private String weightTypeInput;
+    private String weightTypeOtherInput;
+    private String programTypeInput;
+    private String setsInput;
+    private String repsInput;
+    private String elapsedHrsInput;
+    private String elapsedMinInput;
+    private String elapsedSecInput;
+    private String restMinInput;
+    private String restSecInput;
+    private String rpeInput;
+    private String dateHrsInput;
+    private String dateMinInput;
+    private String partOfDayInput;
+    public void collectItemInputs() {
+        exerciseInput = exercise.getText().toString();
+        intensityInput = checkSpinnerContent(intensity);
+        exerciseTypeInput = checkSpinnerContent(exerciseType);
+        weightInput = weight.getText().toString();
+        weightUnitInput = checkSpinnerContent(weightUnit);
+        weightTypeInput = checkSpinnerContent(weightType);
+        weightTypeOtherInput = weightTypeOther.getText().toString();
+        programTypeInput = checkSpinnerContent(programType);
+        setsInput = sets.getText().toString();
+        repsInput = reps.getText().toString();
+        elapsedHrsInput = elapsedHrs.getText().toString();
+        elapsedMinInput = elapsedMin.getText().toString();
+        elapsedSecInput = elapsedSec.getText().toString();
+        if(extraSpecificationsSet) {
+            restMinInput = restMin.getText().toString();
+            restSecInput = restSec.getText().toString();
+            rpeInput = checkSpinnerContent(rpe);
+            dateHrsInput = dateHrs.getText().toString();
+            dateMinInput = dateMin.getText().toString();
+            partOfDayInput = checkSpinnerContent(partOfDay);
+        } else {
+            restMinInput = null;
+            restSecInput = null;
+            rpeInput = null;
+            dateHrsInput = null;
+            dateMinInput = null;
+            partOfDayInput = null;
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.saveEntry) {
+            collectItemInputs();
             Entry entry = new Entry(
-                    exercise.getText().toString(),
-                    checkSpinnerContent(intensity),
-                    checkSpinnerContent(exerciseTypes),
-                    weight.getText().toString(),
-                    checkSpinnerContent(weightUnits),
-                    checkSpinnerContent(weightTypes),
-                    checkSpinnerContent(programTypes),
-                    sets.getText().toString(),
-                    reps.getText().toString(),
-                    elapsedHrs.getText().toString(),
-                    elapsedMin.getText().toString(),
-                    elapsedSec.getText().toString(),
-                    restMin.getText().toString(),
-                    restSec.getText().toString(),
-                    checkSpinnerContent(rpe),
-                    dateHrs.getText().toString(),
-                    dateMin.getText().toString(),
-                    checkSpinnerContent(timeAM_PM));
+                    exerciseInput,
+                    intensityInput,
+                    exerciseTypeInput,
+                    weightInput,
+                    weightUnitInput,
+                    weightTypeInput,
+                    weightTypeOtherInput,
+                    programTypeInput,
+                    setsInput,
+                    repsInput,
+                    elapsedHrsInput,
+                    elapsedMinInput,
+                    elapsedSecInput,
+                    restMinInput,
+                    restSecInput,
+                    rpeInput,
+                    dateHrsInput,
+                    dateMinInput,
+                    partOfDayInput);
             EntryDatabase db = new EntryDatabase(this);
             long id = db.addEntry(entry);
             Entry confirm = db.getEntry(id);
@@ -235,31 +365,31 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
             return;
         }
         String itemSelected = parent.getItemAtPosition(pos).toString();
-        if(parent.getId() == exerciseTypes.getId()) {
+        if(parent.getId() == exerciseType.getId()) {
             switch (itemSelected) {
                 case "Weights":
-                    weightTypes.setVisibility(View.VISIBLE);
+                    weightType.setVisibility(View.VISIBLE);
                     weight.setVisibility(View.VISIBLE);
-                    weightUnits.setVisibility(View.VISIBLE);
+                    weightUnit.setVisibility(View.VISIBLE);
                     break;
                 case "Bodyweight": case "Cardio":
                     weight.setVisibility(View.GONE);
-                    weightUnits.setVisibility(View.GONE);
+                    weightUnit.setVisibility(View.GONE);
                     break;
                 default:
-                    weightTypes.setVisibility(View.GONE);
+                    weightType.setVisibility(View.GONE);
                     weight.setVisibility(View.VISIBLE);
-                    weightUnits.setVisibility(View.VISIBLE);
+                    weightUnit.setVisibility(View.VISIBLE);
             }
         }
-        else if(parent.getId() == weightTypes.getId()) {
+        else if(parent.getId() == weightType.getId()) {
             if(itemSelected.equals("Other")) {
                 weightTypeOther.setVisibility(View.VISIBLE);
             } else {
                 weightTypeOther.setVisibility(View.GONE);
             }
         }
-        else if(parent.getId() == programTypes.getId()) {
+        else if(parent.getId() == programType.getId()) {
             switch (itemSelected) {
                 case "Sets x Reps":
                     setProgramTypeVisibility(true, true, false);
@@ -280,4 +410,11 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
         }
     }
     public void onNothingSelected(AdapterView<?> parent) {}
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.save_menu, menu);
+        return true;
+    }
 }

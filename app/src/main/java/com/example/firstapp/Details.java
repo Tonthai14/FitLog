@@ -47,7 +47,7 @@ public class Details extends AppCompatActivity {
 
         // TextViews
         intensity = findViewById(R.id.intensity);
-        exerciseType = findViewById(R.id.exerciseTypes);
+        exerciseType = findViewById(R.id.exerciseType);
         weight = findViewById(R.id.weight);
         weightTypeDisplay = findViewById(R.id.weightTypeDisplay);
         weightType = findViewById(R.id.weightType);
@@ -95,7 +95,7 @@ public class Details extends AppCompatActivity {
     }
 
     private boolean checkHasInput(TextView item, String text) {
-        if(!text.isEmpty()) {
+        if(text != null) { // Not null or not empty
             if(!item.getText().equals("")) {
                 item.setText(getString(R.string.addSpace, item.getText(), " "));
             }

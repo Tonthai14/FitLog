@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Workout Logger</string>
-    <string-array name="exerciseTypes">
+    <string-array name="exerciseType">
         <item>Weights</item>
         <item>Bodyweight</item>
         <item>Weighted</item>
@@ -25,7 +25,7 @@
         <item>Difficult</item>
     </string-array>
 
-    <string-array name="numTen">
+    <string-array name="rpe">
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -38,7 +38,7 @@
         <item>10</item>
     </string-array>
 
-    <string-array name="programTypes">
+    <string-array name="programType">
         <item>Sets x Reps</item>
         <item>Sets x Duration</item>
         <item>Duration</item>
@@ -51,7 +51,7 @@
         <item>PM</item>
     </string-array>
 
-    <string-array name="weightTypes">
+    <string-array name="weightType">
         <item>Barbell</item>
         <item>Dumbbells</item>
         <item>EZ Bar</item>
@@ -59,19 +59,19 @@
         <item>Other</item>
     </string-array>
 
-    <string-array name="weightUnits">
+    <string-array name="weightUnit">
         <item>lbs</item>
         <item>kgs</item>
     </string-array>
 
-    <string name ="exercise">Exercise Name</string>
-    <string name ="intensity">Intensity</string>
-    <string name ="weight">Weight</string>
-    <string name ="pounds">lbs</string>
-    <string name ="kilograms">kgs</string>
-    <string name ="time">Time</string>
-    <string name ="typeExercise">Exercise Type</string>
-    <string name ="duration">Duration</string>
+    <string name="exercise">Exercise Name</string>
+    <string name="intensity">Intensity</string>
+    <string name="weight">Weight</string>
+    <string name="pounds">lbs</string>
+    <string name="kilograms">kgs</string>
+    <string name="time">Time</string>
+    <string name="typeExercise">Exercise Type</string>
+    <string name="duration">Duration</string>
     <string name="defaultInput">No Input</string>
 
     <string name="hour">hrs</string>
