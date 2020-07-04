@@ -1,20 +1,21 @@
 <resources>
     <string name="app_name">Workout Logger</string>
+
+    <string-array name="days">
+        <item>@string/sunday</item>
+        <item>@string/monday</item>
+        <item>@string/tuesday</item>
+        <item>@string/wednesday</item>
+        <item>@string/thursday</item>
+        <item>@string/friday</item>
+        <item>@string/saturday</item>
+    </string-array>
+
     <string-array name="exerciseType">
         <item>Weights</item>
         <item>Bodyweight</item>
         <item>Weighted</item>
         <item>Cardio</item>
-    </string-array>
-
-    <string-array name="days">
-        <item>Sunday</item>
-        <item>Monday</item>
-        <item>Tuesday</item>
-        <item>Wednesday</item>
-        <item>Thursday</item>
-        <item>Friday</item>
-        <item>Saturday</item>
     </string-array>
 
     <string-array name="intensity">
@@ -64,6 +65,15 @@
         <item>kgs</item>
     </string-array>
 
+    <string name="days">Days</string>
+    <string name="sunday">Sunday</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    
     <string name="exercise">Exercise Name</string>
     <string name="intensity">Intensity</string>
     <string name="weight">Weight</string>
@@ -94,6 +104,7 @@
     <string name="specs">More Specifications</string>
     <string name="oneRepMax">1 Rep Max</string>
 
+    <string name="noActivity">No activity yet</string>
     <string name="addSpace">%s %s</string>
     <string name="weightDetails">%s %s %s %s</string>
     <string name="weightText">%1s %2s</string>

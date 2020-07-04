@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntryDatabase extends SQLiteOpenHelper {
-    private static int DATABASE_VERSION = 10;
+    private static int DATABASE_VERSION = 11;
     private static final String DATABASE_NAME = "EntryDB";
     private static final String TABLE_NAME = "EntryTable";
 
@@ -19,6 +19,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
     }
 
     private static final String KEY_ID = "id";
+    private static final String KEY_DAY_OF_THE_WEEK = "dayOfTheWeek";
     private static final String KEY_EXERCISE = "exercise";
     private static final String KEY_INTENSITY = "intensity";
     private static final String KEY_EXERCISE_TYPE = "exerciseType";
@@ -42,6 +43,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_NAME + " (" +
                 KEY_ID + " INTEGER PRIMARY KEY," +
+                KEY_DAY_OF_THE_WEEK + " TEXT," +
                 KEY_EXERCISE + " TEXT," +
                 KEY_INTENSITY + " TEXT," +
                 KEY_EXERCISE_TYPE + " TEXT," +
@@ -76,6 +78,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
     public long addEntry(Entry entry) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
+        cv.put(KEY_DAY_OF_THE_WEEK, entry.getDayOfTheWeek());
         cv.put(KEY_EXERCISE, entry.getExercise());
         cv.put(KEY_INTENSITY, entry.getIntensity());
         cv.put(KEY_EXERCISE_TYPE, entry.getExerciseType());
@@ -102,7 +105,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
     public Entry getEntry(long id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] query = new String[]
-                {KEY_ID, KEY_EXERCISE, KEY_INTENSITY, KEY_EXERCISE_TYPE, KEY_WEIGHT,
+                {KEY_ID, KEY_DAY_OF_THE_WEEK, KEY_EXERCISE, KEY_INTENSITY, KEY_EXERCISE_TYPE, KEY_WEIGHT,
                         KEY_WEIGHT_UNIT, KEY_WEIGHT_TYPE, KEY_WEIGHT_TYPE_OTHER, KEY_PROGRAM_TYPE,
                         KEY_SETS, KEY_REPS, KEY_ELAPSED_HRS, KEY_ELAPSED_MIN, KEY_ELAPSED_SEC,
                         KEY_REST_MIN, KEY_REST_SEC, KEY_RPE, KEY_DATE_HRS, KEY_DATE_MIN, KEY_AM_PM};
@@ -132,7 +135,8 @@ public class EntryDatabase extends SQLiteOpenHelper {
                 cursor.getString(16),
                 cursor.getString(17),
                 cursor.getString(18),
-                cursor.getString(19));
+                cursor.getString(19),
+                cursor.getString(20));
     }
 
     public List<Entry> getAllEntries() {
@@ -144,35 +148,74 @@ public class EntryDatabase extends SQLiteOpenHelper {
             do {
                 Entry entry = new Entry();
                 entry.setId(Long.parseLong(cursor.getString(0)));
-                entry.setExercise(cursor.getString(1));
-                entry.setIntensity(cursor.getString(2));
-                entry.setExerciseType(cursor.getString(3));
-                entry.setWeight(cursor.getString(4));
-                entry.setWeightUnit(cursor.getString(5));
-                entry.setWeightType(cursor.getString(6));
-                entry.setWeightTypeOther(cursor.getString(7));
-                entry.setProgramType(cursor.getString(8));
-                entry.setSets(cursor.getString(9));
-                entry.setReps(cursor.getString(10));
-                entry.setElapsedHrs(cursor.getString(11));
-                entry.setElapsedMin(cursor.getString(12));
-                entry.setElapsedSec(cursor.getString(13));
-                entry.setRestMin(cursor.getString(14));
-                entry.setRestSec(cursor.getString(15));
-                entry.setRpe(cursor.getString(16));
-                entry.setDateHrs(cursor.getString(17));
-                entry.setDateMin(cursor.getString(18));
-                entry.setAM_PM(cursor.getString(19));
+                entry.setDayOfTheWeek(cursor.getString(1));
+                entry.setExercise(cursor.getString(2));
+                entry.setIntensity(cursor.getString(3));
+                entry.setExerciseType(cursor.getString(4));
+                entry.setWeight(cursor.getString(5));
+                entry.setWeightUnit(cursor.getString(6));
+                entry.setWeightType(cursor.getString(7));
+                entry.setWeightTypeOther(cursor.getString(8));
+                entry.setProgramType(cursor.getString(9));
+                entry.setSets(cursor.getString(10));
+                entry.setReps(cursor.getString(11));
+                entry.setElapsedHrs(cursor.getString(12));
+                entry.setElapsedMin(cursor.getString(13));
+                entry.setElapsedSec(cursor.getString(14));
+                entry.setRestMin(cursor.getString(15));
+                entry.setRestSec(cursor.getString(16));
+                entry.setRpe(cursor.getString(17));
+                entry.setDateHrs(cursor.getString(18));
+                entry.setDateMin(cursor.getString(19));
+                entry.setAM_PM(cursor.getString(20));
                 allEntries.add(entry);
             } while(cursor.moveToNext());
         }
         return allEntries;
     }
 
+    public List<Entry> getDayEntries(String dayOfTheWeek) {
+        List<Entry> dayEntries = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + KEY_ID + " DESC";
+        SQLiteDatabase db = this.getReadableDatabase();
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()) {
+            do {
+                if(cursor.getString(1).equals(dayOfTheWeek)) {
+                    Entry entry = new Entry();
+                    entry.setId(Long.parseLong(cursor.getString(0)));
+                    entry.setDayOfTheWeek(cursor.getString(1));
+                    entry.setExercise(cursor.getString(2));
+                    entry.setIntensity(cursor.getString(3));
+                    entry.setExerciseType(cursor.getString(4));
+                    entry.setWeight(cursor.getString(5));
+                    entry.setWeightUnit(cursor.getString(6));
+                    entry.setWeightType(cursor.getString(7));
+                    entry.setWeightTypeOther(cursor.getString(8));
+                    entry.setProgramType(cursor.getString(9));
+                    entry.setSets(cursor.getString(10));
+                    entry.setReps(cursor.getString(11));
+                    entry.setElapsedHrs(cursor.getString(12));
+                    entry.setElapsedMin(cursor.getString(13));
+                    entry.setElapsedSec(cursor.getString(14));
+                    entry.setRestMin(cursor.getString(15));
+                    entry.setRestSec(cursor.getString(16));
+                    entry.setRpe(cursor.getString(17));
+                    entry.setDateHrs(cursor.getString(18));
+                    entry.setDateMin(cursor.getString(19));
+                    entry.setAM_PM(cursor.getString(20));
+                    dayEntries.add(entry);
+                }
+            } while(cursor.moveToNext());
+        }
+        return dayEntries;
+    }
+
     public int editEntry(Entry entry) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(KEY_EXERCISE, entry.getExercise());
+        cv.put(KEY_DAY_OF_THE_WEEK, entry.getDayOfTheWeek());
         cv.put(KEY_INTENSITY, entry.getIntensity());
         cv.put(KEY_EXERCISE_TYPE, entry.getExerciseType());
         cv.put(KEY_WEIGHT, entry.getWeight());

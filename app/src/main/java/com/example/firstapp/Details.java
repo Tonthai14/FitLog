@@ -147,7 +147,7 @@ public class Details extends AppCompatActivity {
             db.deleteEntry(id);
             Toast.makeText(getApplicationContext(), "Entry Deleted", Toast.LENGTH_SHORT).show();
             // Go back to main
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, DayLayout.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

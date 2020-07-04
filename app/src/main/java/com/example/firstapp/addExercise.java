@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -115,6 +116,7 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
         setSpinner(partOfDay, R.array.timeAM_PM);
     }
 
+    String dayOfTheWeek;
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +126,9 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         Objects.requireNonNull(getSupportActionBar()).setTitle("New Entry");
+
+        Intent prevIntent = getIntent();
+        dayOfTheWeek = prevIntent.getStringExtra("dayOfTheWeek");
 
         // EditTexts
         exercise = findViewById(R.id.exercise);
@@ -309,6 +314,7 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
         if(item.getItemId() == R.id.saveEntry) {
             collectItemInputs();
             Entry entry = new Entry(
+                    dayOfTheWeek,
                     exerciseInput,
                     intensityInput,
                     exerciseTypeInput,

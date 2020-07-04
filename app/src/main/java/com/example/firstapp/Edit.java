@@ -38,6 +38,7 @@ public class Edit extends AppCompatActivity implements AdapterView.OnItemSelecte
             rpe,
             timeAM_PM;
     long id;
+    String dayOfTheWeek;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,7 @@ public class Edit extends AppCompatActivity implements AdapterView.OnItemSelecte
         id = intent.getLongExtra("ID", 0);
         EntryDatabase db = new EntryDatabase(this);
         Entry entry = db.getEntry(id);
+        dayOfTheWeek = entry.getDayOfTheWeek();
 
         // EditTexts
         exercise = findViewById(R.id.exercise);
@@ -155,6 +157,7 @@ public class Edit extends AppCompatActivity implements AdapterView.OnItemSelecte
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.saveEntry) {
             Entry entry = new Entry(id,
+                    dayOfTheWeek,
                     exercise.getText().toString(),
                     intensity.getSelectedItem().toString(),
                     exerciseType.getSelectedItem().toString(),

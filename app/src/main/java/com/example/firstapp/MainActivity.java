@@ -2,27 +2,14 @@ package com.example.firstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
-    private MyAdapter adapter;
-    private EntryDatabase db;
-    TextView noEntries;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,51 +17,54 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
-
-        db = new EntryDatabase(this);
-        List<Entry> allEntries = db.getAllEntries();
-        recyclerView = findViewById(R.id.myRecyclerView);
-        noEntries = findViewById(R.id.noEntries);
-
-        listEmpty(allEntries);
-    }
-
-    public void listEmpty(List<Entry> entries) {
-        if(entries.isEmpty()) {
-            noEntries.setVisibility(View.VISIBLE);
-        } else {
-            noEntries.setVisibility(View.GONE);
-            displayList(entries);
-        }
-    }
-
-    public void displayList(List<Entry> allEntries) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MyAdapter(this, allEntries);
-        recyclerView.setAdapter(adapter);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.add_menu, menu);
+        inflater.inflate(R.menu.drop_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.addEntry) {
-            Toast.makeText(this, "Add new entry", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, addExercise.class);
-            startActivity(intent);
+        switch(item.getItemId()) {
+            case R.id.Sunday:
+                Intent sunday = new Intent(this, DayLayout.class);
+                sunday.putExtra("dayOfTheWeek", "Sunday");
+                startActivity(sunday);
+                break;
+            case R.id.Monday:
+                Intent monday = new Intent(this, DayLayout.class);
+                monday.putExtra("dayOfTheWeek", "Monday");
+                startActivity(monday);
+                break;
+            case R.id.Tuesday:
+                Intent tuesday = new Intent(this, DayLayout.class);
+                tuesday.putExtra("dayOfTheWeek", "Tuesday");
+                startActivity(tuesday);
+                break;
+            case R.id.Wednesday:
+                Intent wednesday = new Intent(this, DayLayout.class);
+                wednesday.putExtra("dayOfTheWeek", "Wednesday");
+                startActivity(wednesday);
+                break;
+            case R.id.Thursday:
+                Intent thursday = new Intent(this, DayLayout.class);
+                thursday.putExtra("dayOfTheWeek", "Thursday");
+                startActivity(thursday);
+                break;
+            case R.id.Friday:
+                Intent friday = new Intent(this, DayLayout.class);
+                friday.putExtra("dayOfTheWeek", "Friday");
+                startActivity(friday);
+                break;
+            case R.id.Saturday:
+                Intent saturday = new Intent(this, DayLayout.class);
+                saturday.putExtra("dayOfTheWeek", "Saturday");
+                startActivity(saturday);
+                break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        List<Entry> getAllEntries = db.getAllEntries();
-        listEmpty(getAllEntries);
     }
 }

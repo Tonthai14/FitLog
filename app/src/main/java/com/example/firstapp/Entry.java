@@ -2,6 +2,7 @@ package com.example.firstapp;
 
 public class Entry {
     private long id;
+    private String dayOfTheWeek;
     private String exercise;
     private String intensity;
     private String exerciseType;
@@ -22,10 +23,11 @@ public class Entry {
     private String dateMin;
     private String AM_PM;
 
-    Entry(String exercise, String intensity, String exerciseType, String weight, String weightUnit,
-          String weightType, String weightTypeOther, String programType, String sets, String reps,
-          String elapsedHrs, String elapsedMin, String elapsedSec, String restMin, String restSec,
-          String rpe, String dateHrs, String dateMin, String AM_PM) {
+    Entry(String dayOfTheWeek, String exercise, String intensity, String exerciseType, String weight,
+          String weightUnit, String weightType, String weightTypeOther, String programType, String sets,
+          String reps, String elapsedHrs, String elapsedMin, String elapsedSec, String restMin,
+          String restSec, String rpe, String dateHrs, String dateMin, String AM_PM) {
+        this.dayOfTheWeek = dayOfTheWeek;
         this.exercise = exercise;
         this.intensity = intensity;
         this.exerciseType = exerciseType;
@@ -47,11 +49,12 @@ public class Entry {
         this.AM_PM = AM_PM;
     }
 
-    Entry(long id, String exercise, String intensity, String exerciseType, String weight,
-          String weightUnit, String weightType, String weightTypeOther, String programType,
+    Entry(long id, String dayOfTheWeek, String exercise, String intensity, String exerciseType,
+          String weight, String weightUnit, String weightType, String weightTypeOther, String programType,
           String sets, String reps, String elapsedHrs, String elapsedMin, String elapsedSec,
           String restMin, String restSec, String rpe, String dateHrs, String dateMin, String AM_PM) {
         this.id = id;
+        this.dayOfTheWeek = dayOfTheWeek;
         this.exercise = exercise;
         this.intensity = intensity;
         this.exerciseType = exerciseType;
@@ -81,6 +84,9 @@ public class Entry {
     public void setId(long id) {
         this.id = id;
     }
+
+    public String getDayOfTheWeek() { return dayOfTheWeek; }
+    public void setDayOfTheWeek(String dayOfTheWeek) { this.dayOfTheWeek = dayOfTheWeek; }
 
     public String getExercise() {
         return exercise;
