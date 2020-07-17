@@ -35,7 +35,7 @@ public class Details extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_top);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
@@ -146,7 +146,7 @@ public class Details extends AppCompatActivity {
             EntryDatabase db = new EntryDatabase(getApplicationContext());
             db.deleteEntry(id);
             Toast.makeText(getApplicationContext(), "Entry Deleted", Toast.LENGTH_SHORT).show();
-            // Go back to main
+            // Go back to day
             Intent intent = new Intent(this, DayLayout.class);
             startActivity(intent);
         }

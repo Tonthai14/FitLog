@@ -47,8 +47,8 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
             rpeDisplay,
             dateDisplay, dateHrsDisplay, dateMinDisplay;
     Switch moreSpecifications;
-
     List<TextView> durationItems;
+    private String date;
 
     private boolean extraSpecificationsSet = false;
     private void findExtraViews() {
@@ -116,19 +116,18 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
         setSpinner(partOfDay, R.array.timeAM_PM);
     }
 
-    String dayOfTheWeek;
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_exercise);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_top);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         Objects.requireNonNull(getSupportActionBar()).setTitle("New Entry");
 
         Intent prevIntent = getIntent();
-        dayOfTheWeek = prevIntent.getStringExtra("dayOfTheWeek");
+        date = prevIntent.getStringExtra("date");
 
         // EditTexts
         exercise = findViewById(R.id.exercise);
@@ -187,7 +186,6 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
             }
             @Override public void afterTextChanged(Editable s) {}
         });
-
 
         // TextViews
         setsDisplay = findViewById(R.id.setsDisplay);
@@ -314,7 +312,7 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
         if(item.getItemId() == R.id.saveEntry) {
             collectItemInputs();
             Entry entry = new Entry(
-                    dayOfTheWeek,
+                    date,
                     exerciseInput,
                     intensityInput,
                     exerciseTypeInput,
@@ -379,10 +377,11 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
                     weightUnit.setVisibility(View.VISIBLE);
                     break;
                 case "Bodyweight": case "Cardio":
+                    weightType.setVisibility(View.GONE);
                     weight.setVisibility(View.GONE);
                     weightUnit.setVisibility(View.GONE);
                     break;
-                default:
+                case "Weighted":
                     weightType.setVisibility(View.GONE);
                     weight.setVisibility(View.VISIBLE);
                     weightUnit.setVisibility(View.VISIBLE);

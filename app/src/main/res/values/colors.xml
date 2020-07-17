@@ -6,4 +6,5 @@
     <color name="addButton">#65932F</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="toolbar">#2C2929</color>
 </resources>

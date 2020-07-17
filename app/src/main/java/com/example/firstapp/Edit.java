@@ -38,12 +38,12 @@ public class Edit extends AppCompatActivity implements AdapterView.OnItemSelecte
             rpe,
             timeAM_PM;
     long id;
-    String dayOfTheWeek;
+    String date;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_top);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
@@ -51,7 +51,7 @@ public class Edit extends AppCompatActivity implements AdapterView.OnItemSelecte
         id = intent.getLongExtra("ID", 0);
         EntryDatabase db = new EntryDatabase(this);
         Entry entry = db.getEntry(id);
-        dayOfTheWeek = entry.getDayOfTheWeek();
+        date = entry.getDate();
 
         // EditTexts
         exercise = findViewById(R.id.exercise);
@@ -157,7 +157,7 @@ public class Edit extends AppCompatActivity implements AdapterView.OnItemSelecte
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.saveEntry) {
             Entry entry = new Entry(id,
-                    dayOfTheWeek,
+                    date,
                     exercise.getText().toString(),
                     intensity.getSelectedItem().toString(),
                     exerciseType.getSelectedItem().toString(),

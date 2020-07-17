@@ -2,7 +2,7 @@ package com.example.firstapp;
 
 public class Entry {
     private long id;
-    private String dayOfTheWeek;
+    private String date;
     private String exercise;
     private String intensity;
     private String exerciseType;
@@ -23,11 +23,19 @@ public class Entry {
     private String dateMin;
     private String AM_PM;
 
-    Entry(String dayOfTheWeek, String exercise, String intensity, String exerciseType, String weight,
-          String weightUnit, String weightType, String weightTypeOther, String programType, String sets,
-          String reps, String elapsedHrs, String elapsedMin, String elapsedSec, String restMin,
-          String restSec, String rpe, String dateHrs, String dateMin, String AM_PM) {
-        this.dayOfTheWeek = dayOfTheWeek;
+    Entry(String date,
+          String exercise,
+          String intensity,
+          String exerciseType,
+          String weight, String weightUnit,
+          String weightType, String weightTypeOther,
+          String programType,
+          String sets, String reps,
+          String elapsedHrs, String elapsedMin, String elapsedSec,
+          String restMin, String restSec,
+          String rpe,
+          String dateHrs, String dateMin, String AM_PM) {
+        this.date = date;
         this.exercise = exercise;
         this.intensity = intensity;
         this.exerciseType = exerciseType;
@@ -49,12 +57,21 @@ public class Entry {
         this.AM_PM = AM_PM;
     }
 
-    Entry(long id, String dayOfTheWeek, String exercise, String intensity, String exerciseType,
-          String weight, String weightUnit, String weightType, String weightTypeOther, String programType,
-          String sets, String reps, String elapsedHrs, String elapsedMin, String elapsedSec,
-          String restMin, String restSec, String rpe, String dateHrs, String dateMin, String AM_PM) {
+    Entry(long id,
+          String date,
+          String exercise,
+          String intensity,
+          String exerciseType,
+          String weight, String weightUnit,
+          String weightType, String weightTypeOther,
+          String programType,
+          String sets, String reps,
+          String elapsedHrs, String elapsedMin, String elapsedSec,
+          String restMin, String restSec,
+          String rpe,
+          String dateHrs, String dateMin, String AM_PM) {
         this.id = id;
-        this.dayOfTheWeek = dayOfTheWeek;
+        this.date = date;
         this.exercise = exercise;
         this.intensity = intensity;
         this.exerciseType = exerciseType;
@@ -85,8 +102,8 @@ public class Entry {
         this.id = id;
     }
 
-    public String getDayOfTheWeek() { return dayOfTheWeek; }
-    public void setDayOfTheWeek(String dayOfTheWeek) { this.dayOfTheWeek = dayOfTheWeek; }
+    public String getDate() { return date; }
+    public void setDate(String date) { this.date = date; }
 
     public String getExercise() {
         return exercise;

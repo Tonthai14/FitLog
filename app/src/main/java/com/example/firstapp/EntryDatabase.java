@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntryDatabase extends SQLiteOpenHelper {
-    private static int DATABASE_VERSION = 11;
+    private static int DATABASE_VERSION = 14;
     private static final String DATABASE_NAME = "EntryDB";
     private static final String TABLE_NAME = "EntryTable";
 
@@ -19,7 +19,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
     }
 
     private static final String KEY_ID = "id";
-    private static final String KEY_DAY_OF_THE_WEEK = "dayOfTheWeek";
+    private static final String KEY_DATE = "date";
     private static final String KEY_EXERCISE = "exercise";
     private static final String KEY_INTENSITY = "intensity";
     private static final String KEY_EXERCISE_TYPE = "exerciseType";
@@ -43,7 +43,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_NAME + " (" +
                 KEY_ID + " INTEGER PRIMARY KEY," +
-                KEY_DAY_OF_THE_WEEK + " TEXT," +
+                KEY_DATE + " TEXT," +
                 KEY_EXERCISE + " TEXT," +
                 KEY_INTENSITY + " TEXT," +
                 KEY_EXERCISE_TYPE + " TEXT," +
@@ -78,7 +78,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
     public long addEntry(Entry entry) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(KEY_DAY_OF_THE_WEEK, entry.getDayOfTheWeek());
+        cv.put(KEY_DATE, entry.getDate());
         cv.put(KEY_EXERCISE, entry.getExercise());
         cv.put(KEY_INTENSITY, entry.getIntensity());
         cv.put(KEY_EXERCISE_TYPE, entry.getExerciseType());
@@ -105,10 +105,11 @@ public class EntryDatabase extends SQLiteOpenHelper {
     public Entry getEntry(long id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] query = new String[]
-                {KEY_ID, KEY_DAY_OF_THE_WEEK, KEY_EXERCISE, KEY_INTENSITY, KEY_EXERCISE_TYPE, KEY_WEIGHT,
-                        KEY_WEIGHT_UNIT, KEY_WEIGHT_TYPE, KEY_WEIGHT_TYPE_OTHER, KEY_PROGRAM_TYPE,
-                        KEY_SETS, KEY_REPS, KEY_ELAPSED_HRS, KEY_ELAPSED_MIN, KEY_ELAPSED_SEC,
-                        KEY_REST_MIN, KEY_REST_SEC, KEY_RPE, KEY_DATE_HRS, KEY_DATE_MIN, KEY_AM_PM};
+                {KEY_ID, KEY_DATE, KEY_EXERCISE, KEY_INTENSITY, KEY_EXERCISE_TYPE,
+                        KEY_WEIGHT, KEY_WEIGHT_UNIT, KEY_WEIGHT_TYPE, KEY_WEIGHT_TYPE_OTHER,
+                        KEY_PROGRAM_TYPE, KEY_SETS, KEY_REPS, KEY_ELAPSED_HRS, KEY_ELAPSED_MIN,
+                        KEY_ELAPSED_SEC, KEY_REST_MIN, KEY_REST_SEC, KEY_RPE, KEY_DATE_HRS,
+                        KEY_DATE_MIN, KEY_AM_PM};
         @SuppressLint("Recycle") Cursor cursor = db.query(TABLE_NAME, query, KEY_ID + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
         if(cursor != null) {
@@ -148,7 +149,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
             do {
                 Entry entry = new Entry();
                 entry.setId(Long.parseLong(cursor.getString(0)));
-                entry.setDayOfTheWeek(cursor.getString(1));
+                entry.setDate(cursor.getString(1));
                 entry.setExercise(cursor.getString(2));
                 entry.setIntensity(cursor.getString(3));
                 entry.setExerciseType(cursor.getString(4));
@@ -174,17 +175,17 @@ public class EntryDatabase extends SQLiteOpenHelper {
         return allEntries;
     }
 
-    public List<Entry> getDayEntries(String dayOfTheWeek) {
+    public List<Entry> getDayEntries(String date) {
         List<Entry> dayEntries = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + KEY_ID + " DESC";
         SQLiteDatabase db = this.getReadableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()) {
             do {
-                if(cursor.getString(1).equals(dayOfTheWeek)) {
+                if(cursor.getString(1).equals(date)) {
                     Entry entry = new Entry();
                     entry.setId(Long.parseLong(cursor.getString(0)));
-                    entry.setDayOfTheWeek(cursor.getString(1));
+                    entry.setDate(cursor.getString(1));
                     entry.setExercise(cursor.getString(2));
                     entry.setIntensity(cursor.getString(3));
                     entry.setExerciseType(cursor.getString(4));
@@ -215,7 +216,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(KEY_EXERCISE, entry.getExercise());
-        cv.put(KEY_DAY_OF_THE_WEEK, entry.getDayOfTheWeek());
+        cv.put(KEY_DATE, entry.getDate());
         cv.put(KEY_INTENSITY, entry.getIntensity());
         cv.put(KEY_EXERCISE_TYPE, entry.getExerciseType());
         cv.put(KEY_WEIGHT, entry.getWeight());

@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DayLayout"></activity>
+        <activity android:name=".WeekLayout" />
+        <activity android:name=".DayLayout" />
         <activity android:name=".Details" />
         <activity android:name=".addExercise" />
         <activity android:name=".Edit" />
