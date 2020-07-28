@@ -27,7 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class addExercise extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class AddExercise extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     EditText exercise,
             weight, weightTypeOther,
             sets, reps,
@@ -120,10 +120,10 @@ public class addExercise extends AppCompatActivity implements AdapterView.OnItem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_exercise);
-        Toolbar toolbar = findViewById(R.id.toolbar_top);
+        setContentView(R.layout.activity_object_entry);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        //toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         Objects.requireNonNull(getSupportActionBar()).setTitle("New Entry");
 
         Intent prevIntent = getIntent();

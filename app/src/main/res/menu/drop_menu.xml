@@ -40,4 +40,12 @@
         </menu>
     </item>
 
+    <item
+        android:id="@+id/settings_menu"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_baseline_settings_24"
+        app:showAsAction="ifRoom">
+
+    </item>
+
 </menu>

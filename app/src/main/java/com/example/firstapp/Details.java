@@ -35,9 +35,9 @@ public class Details extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-        Toolbar toolbar = findViewById(R.id.toolbar_top);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        //toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
         Intent intent = getIntent();
         id = intent.getLongExtra("ID", 0);

@@ -27,9 +27,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar_top);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        //toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
         // Setting dates for the current week
         final SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault());
@@ -92,6 +92,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent saturday = new Intent(this, DayLayout.class);
                 saturday.putExtra("date", currentWeek[6]);
                 startActivity(saturday);
+                break;
+            case R.id.settings_menu:
+                Intent settings = new Intent(this, Settings.class);
+                startActivity(settings);
                 break;
         }
         return super.onOptionsItemSelected(item);

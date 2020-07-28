@@ -5,15 +5,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class PresetsViewModel extends ViewModel {
+    public PresetsViewModel() { }
 
-    private MutableLiveData<String> mText;
-
-    public PresetsViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is presets fragment");
-    }
-
-    public LiveData<String> getText() {
-        return mText;
-    }
 }

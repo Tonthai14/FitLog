@@ -42,10 +42,10 @@ public class Edit extends AppCompatActivity implements AdapterView.OnItemSelecte
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit);
-        Toolbar toolbar = findViewById(R.id.toolbar_top);
+        setContentView(R.layout.activity_object_entry);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        //toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
         Intent intent = getIntent();
         id = intent.getLongExtra("ID", 0);

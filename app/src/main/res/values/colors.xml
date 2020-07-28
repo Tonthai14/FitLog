@@ -4,7 +4,5 @@
     <color name="colorPrimaryDark">#210C51</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="addButton">#65932F</color>
-    <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
     <color name="toolbar">#2C2929</color>
 </resources>

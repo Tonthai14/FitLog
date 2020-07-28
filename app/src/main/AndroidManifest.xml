@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WeekLayout" />
+        <activity android:name=".PresetExercises"></activity>
+        <activity android:name=".Settings" />
         <activity android:name=".DayLayout" />
         <activity android:name=".Details" />
-        <activity android:name=".addExercise" />
+        <activity android:name=".AddExercise" />
         <activity android:name=".Edit" />
         <activity android:name=".MainActivity">
             <intent-filter>
