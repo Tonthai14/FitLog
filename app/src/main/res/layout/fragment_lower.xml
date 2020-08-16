@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.LowerFragment">
+    tools:context=".ui.presets.LowerFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -12,6 +12,126 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginTop="1dp"
+                android:id="@+id/squat"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:text="@string/squat"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                tools:ignore="RtlSymmetry" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_marginTop="1dp"
+                android:id="@+id/legPress"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:text="@string/legPress"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                tools:ignore="RtlSymmetry" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_marginTop="1dp"
+                android:id="@+id/legExtension"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:text="@string/legExtension"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                tools:ignore="RtlSymmetry" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_marginTop="1dp"
+                android:id="@+id/hipThrust"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:text="@string/hipThrust"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                tools:ignore="RtlSymmetry" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_marginTop="1dp"
+                android:id="@+id/deadlift"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:text="@string/deadlift"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                tools:ignore="RtlSymmetry" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_marginTop="1dp"
+                android:id="@+id/hamstringCurl"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:text="@string/hamstringCurl"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                tools:ignore="RtlSymmetry" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_marginTop="1dp"
+                android:id="@+id/calfRaise"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:text="@string/calfRaise"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                tools:ignore="RtlSymmetry" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+        </LinearLayout>
     </ScrollView>
 </FrameLayout>

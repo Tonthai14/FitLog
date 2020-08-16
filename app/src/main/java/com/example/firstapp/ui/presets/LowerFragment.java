@@ -1,4 +1,4 @@
-package com.example.firstapp.ui;
+package com.example.firstapp.ui.presets;
 
 import android.os.Bundle;
 

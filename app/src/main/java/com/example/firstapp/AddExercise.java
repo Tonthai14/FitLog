@@ -123,7 +123,7 @@ public class AddExercise extends AppCompatActivity implements AdapterView.OnItem
         setContentView(R.layout.activity_object_entry);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         Objects.requireNonNull(getSupportActionBar()).setTitle("New Entry");
 
         Intent prevIntent = getIntent();

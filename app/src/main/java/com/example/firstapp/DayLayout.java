@@ -36,7 +36,7 @@ public class DayLayout extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         Objects.requireNonNull(getSupportActionBar()).setTitle(date);
 
         db = new EntryDatabase(this);
@@ -58,7 +58,7 @@ public class DayLayout extends AppCompatActivity {
 
     public void displayList(List<Entry> allEntries) {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        MyAdapter adapter = new MyAdapter(this, allEntries);
+        MyAdapter adapter = new MyAdapter(this, allEntries, date);
         recyclerView.setAdapter(adapter);
     }
 

@@ -1,4 +1,4 @@
-package com.example.firstapp.ui;
+package com.example.firstapp.ui.presets;
 
 import android.os.Bundle;
 
@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.example.firstapp.R;
 
@@ -16,7 +17,7 @@ import com.example.firstapp.R;
  * Use the {@link UpperFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UpperFragment extends Fragment {
+public class UpperFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,6 +66,25 @@ public class UpperFragment extends Fragment {
         LinearLayout entriesPage = root.findViewById(R.id.entriesPage);
         entriesPage = new LinearLayout(root.getContext());
 
+        RelativeLayout benchVariations = root.findViewById(R.id.benchPressVariations);
+        RelativeLayout pushUpVariations = root.findViewById(R.id.pushUpVariations);
+        RelativeLayout rowVariations = root.findViewById(R.id.rowVariations);
+        benchVariations.setOnClickListener(this);
+        pushUpVariations.setOnClickListener(this);
+        rowVariations.setOnClickListener(this);
+        
         return root;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.benchPressVariations:
+
+                break;
+            case R.id.pushUpVariations:
+
+                break;
+        }
     }
 }

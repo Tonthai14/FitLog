@@ -1,8 +1,11 @@
 package com.example.firstapp;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +26,7 @@ public class Details extends AppCompatActivity {
             rpeDisplay, rpe,
             dateTimeDisplay, dateTime;
     long id;
+    String date;
 
     enum extraSpecs {
         WEIGHTS,
@@ -37,10 +41,12 @@ public class Details extends AppCompatActivity {
         setContentView(R.layout.activity_details);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
 
         Intent intent = getIntent();
         id = intent.getLongExtra("ID", 0);
+        date = intent.getStringExtra("date");
+
         EntryDatabase db = new EntryDatabase(this);
         Entry entry = db.getEntry(id);
         Objects.requireNonNull(getSupportActionBar()).setTitle(entry.getExercise());
@@ -143,12 +149,26 @@ public class Details extends AppCompatActivity {
             intent.putExtra("ID", id);
             startActivity(intent);
         } else if(item.getItemId() == R.id.deleteEntry) {
-            EntryDatabase db = new EntryDatabase(getApplicationContext());
-            db.deleteEntry(id);
-            Toast.makeText(getApplicationContext(), "Entry Deleted", Toast.LENGTH_SHORT).show();
-            // Go back to day
-            Intent intent = new Intent(this, DayLayout.class);
-            startActivity(intent);
+            new AlertDialog.Builder(Details.this)
+                    .setTitle("Delete Entry")
+                    .setMessage("Are you sure you want to delete this entry?")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            EntryDatabase db = new EntryDatabase(getApplicationContext());
+                            db.deleteEntry(id);
+                            Toast.makeText(getApplicationContext(), "Entry Deleted", Toast.LENGTH_SHORT).show();
+                            finish(); // Reset detail activity
+                            finishActivity(1); // for deleted entry
+                            // Go back to day
+                            Intent intent = new Intent(Details.this, DayLayout.class);
+                            intent.putExtra("date", date);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
         }
         return super.onOptionsItemSelected(item);
     }

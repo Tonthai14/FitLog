@@ -119,18 +119,14 @@
     <string name="programNumbers">%s %s %s %s %s</string>
     <string name="programType">Program Type</string>
 
-    <string name="upper">Upper Body</string>
-    <string name="lower">Lower Body</string>
-    <string name="custom">Custom</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="placeholder">Item Placeholder</string>
 
     <string name="add">Add</string>
     <string name="addNew">Add New</string>
     <string name="choosePreset">Choose Preset</string>
-    <string name="unit">Unit</string>
-    <string name="unitMeasurement">Unit of Measurement</string>
-    <string name="settings">Settings</string>
-    <string name="viewToday">View Today\'s Log</string>
-    <string name="viewTomorrow">View Tomorrow\'s Log</string>
+
     <string name="addPreset">Add Preset</string>
     <string name="presets">Presets</string>
     <string name="title_activity_test">MainActivity</string>
@@ -139,12 +135,38 @@
     <string name="title_presets">Presets</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Settings Strings -->
+    <string name="settings">Settings</string>
+    <string name="unit">Unit</string>
+    <string name="unitMeasurement">Unit of Measurement</string>
+    <string name="notifications">Notifications</string>
+
+    <!-- Calendar Strings -->
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
     <string name="thisWeek">This Week</string>
+    <string name="calendar">Calendar</string>
+    <string name="statistics">Statistics</string>
+    <string name="bodyInfo">Body Info</string>
+    <string name="howTos">How-Tos</string>
+
+    <!-- View days strings in home screen -->
+    <string name="viewPreviousWeek">View Previous Week</string>
+    <string name="viewYesterday">View Yesterday</string>
+    <string name="viewToday">View Today</string>
+    <string name="viewTomorrow">View Tomorrow</string>
+    <string name="viewWeek">View This Week</string>
+
+    <!-- Presets Tabs & Strings -->
+    <string name="noCustoms">No custom presets yet</string>
+    <string name="variations">Variations</string>
+    <string name="upper">Upper Body</string>
+    <string name="lower">Lower Body</string>
+    <string name="custom">Custom</string>
 
     <!-- Default Common Upper Body Exercises -->
     <string name="overheadPress">Overhead/Shoulder Press</string>
+    <string name="frontRaise">Front Raise</string>
     <string name="lateralRaise">Side/Lateral Raise</string>
     <string name="benchPress">Bench Press</string>
     <string name="pushUp">Push Up</string>
@@ -152,6 +174,7 @@
     <string name="tricepPushDown">Tricep Push Down</string>
     <string name="pullUp">Pull Up</string>
     <string name="row">Row</string>
+    <string name="facePull">Face Pull</string>
     <string name="pullDown">Lat Pull Down</string>
     <string name="bicepCurl">Bicep Curl</string>
 

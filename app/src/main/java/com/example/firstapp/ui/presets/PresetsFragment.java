@@ -28,7 +28,7 @@ public class PresetsFragment extends Fragment {
         ViewPager2 viewPager = root.findViewById(R.id.presets_layout);
         viewPager.setAdapter(new PagerAdapter(getActivity()));
 
-        TabLayout tabLayout = root.findViewById(R.id.preset_tabs);
+        TabLayout tabLayout = root.findViewById(R.id.presets_tabs);
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager,
                 new TabLayoutMediator.TabConfigurationStrategy() {
                     @Override

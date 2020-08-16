@@ -18,7 +18,7 @@
         tools:visibility="visible" />
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/preset_tabs"
+        android:id="@+id/presets_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,13 +26,13 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/upper"
+            android:id="@+id/upperBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/upper" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/lower"
+            android:id="@+id/lowerBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/lower" />
@@ -51,7 +51,7 @@
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/preset_tabs" />
+        app:layout_constraintTop_toBottomOf="@+id/presets_tabs" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"

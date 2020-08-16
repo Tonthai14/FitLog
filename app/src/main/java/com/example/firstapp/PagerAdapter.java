@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.firstapp.ui.CustomFragment;
-import com.example.firstapp.ui.LowerFragment;
-import com.example.firstapp.ui.UpperFragment;
+import com.example.firstapp.ui.presets.CustomFragment;
+import com.example.firstapp.ui.presets.LowerFragment;
+import com.example.firstapp.ui.presets.UpperFragment;
 
 public class PagerAdapter extends FragmentStateAdapter {
 

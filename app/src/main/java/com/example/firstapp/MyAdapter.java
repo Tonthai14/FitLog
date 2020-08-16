@@ -1,4 +1,5 @@
 package com.example.firstapp;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -15,17 +16,19 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private LayoutInflater inflater;
     private List<Entry> entries;
+    String date;
     Context ct;
 
-    public MyAdapter(Context ct, List<Entry> entries) {
+    public MyAdapter(Context ct, List<Entry> entries, String date) {
         this.inflater = LayoutInflater.from(ct);
         this.entries = entries;
+        this.date = date;
         this.ct = ct;
     }
 
     @NonNull
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.my_row, parent, false);
+        View view = inflater.inflate(R.layout.exercise_entry_row, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -44,7 +47,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(), Details.class);
                     intent.putExtra("ID", entries.get(getAdapterPosition()).getId());
-                    v.getContext().startActivity(intent);
+                    intent.putExtra("date", date);
+                    int CONFIRM_ENTRY_DELETION = 1; // TODO: Not properly getting rid of old entry list
+                    ((Activity) v.getContext()).startActivityForResult(intent, CONFIRM_ENTRY_DELETION);
                 }
             });
         }
