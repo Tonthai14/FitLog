@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="1dp"
+            android:id="@+id/overheadPress"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:text="@string/overheadPress"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            tools:ignore="RtlSymmetry" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_marginTop="1dp"
+            android:id="@+id/frontRaise"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:text="@string/frontRaise"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            tools:ignore="RtlSymmetry" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_marginTop="1dp"
+            android:id="@+id/lateralRaise"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="10dp"
+            android:text="@string/lateralRaise"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:paddingStart="10dp"
+            tools:ignore="RtlSymmetry" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <RelativeLayout
+            android:id="@+id/benchVariations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginTop="1dp"
+                android:id="@+id/benchPress"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:paddingLeft="10dp"
+                android:text="@string/benchPress"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:paddingStart="10dp"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:drawableRight="@drawable/ic_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/variations"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp"
+                android:layout_centerInParent="true"
+                android:layout_alignParentEnd="true"
+                android:drawableEnd="@drawable/ic_arrow"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <RelativeLayout
+            android:id="@+id/pushUpVariations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginTop="1dp"
+                android:id="@+id/pushUp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="10dp"
+                android:text="@string/pushUp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:paddingStart="10dp"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:drawableRight="@drawable/ic_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/variations"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp"
+                android:layout_centerInParent="true"
+                android:layout_alignParentEnd="true"
+                android:drawableEnd="@drawable/ic_arrow"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_marginTop="1dp"
+            android:id="@+id/tricepExtension"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="10dp"
+            android:text="@string/tricepExtension"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:paddingStart="10dp"
+            tools:ignore="RtlSymmetry" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_marginTop="1dp"
+            android:id="@+id/tricepPushDown"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="10dp"
+            android:text="@string/tricepPushDown"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:paddingStart="10dp"
+            tools:ignore="RtlSymmetry" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_marginTop="1dp"
+            android:id="@+id/pullUp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="10dp"
+            android:text="@string/pullUp"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:paddingStart="10dp"
+            tools:ignore="RtlSymmetry" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <RelativeLayout
+            android:id="@+id/rowVariations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginTop="1dp"
+                android:id="@+id/row"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="10dp"
+                android:text="@string/row"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:paddingStart="10dp"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:drawableRight="@drawable/ic_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/variations"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp"
+                android:layout_centerInParent="true"
+                android:layout_alignParentEnd="true"
+                android:drawableEnd="@drawable/ic_arrow"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_marginTop="1dp"
+            android:id="@+id/facePull"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:text="@string/facePull"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            tools:ignore="RtlSymmetry" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_marginTop="1dp"
+            android:id="@+id/pullDown"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="10dp"
+            android:text="@string/pullDown"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:paddingStart="10dp"
+            tools:ignore="RtlSymmetry" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_marginTop="1dp"
+            android:id="@+id/bicepCurl"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="10dp"
+            android:text="@string/bicepCurl"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:paddingStart="10dp"
+            tools:ignore="RtlSymmetry" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+    </LinearLayout>
+</ScrollView>

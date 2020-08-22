@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:layout_marginTop="1dp"
+        android:id="@+id/levelPushUp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        android:text="@string/levelPushUp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        tools:ignore="RtlSymmetry" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:layout_marginTop="1dp"
+        android:id="@+id/kneePushUp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        android:text="@string/kneePushUp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        tools:ignore="RtlSymmetry" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:layout_marginTop="1dp"
+        android:id="@+id/inclinePushUp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        android:text="@string/inclinePushUp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        tools:ignore="RtlSymmetry" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:layout_marginTop="1dp"
+        android:id="@+id/declinePushUp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        android:text="@string/declinePushUp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        tools:ignore="RtlSymmetry" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:layout_marginTop="1dp"
+        android:id="@+id/diamondPushUp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        android:text="@string/diamondPushUp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        tools:ignore="RtlSymmetry" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:layout_marginTop="1dp"
+        android:id="@+id/cobraPushUp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        android:text="@string/cobraPushUp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        tools:ignore="RtlSymmetry" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:layout_marginTop="1dp"
+        android:id="@+id/handstandPushUp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        android:text="@string/handstandPushUp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        tools:ignore="RtlSymmetry" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+</LinearLayout>

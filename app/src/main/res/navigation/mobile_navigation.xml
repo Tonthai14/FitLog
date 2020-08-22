@@ -6,20 +6,31 @@
     app:startDestination="@+id/navigation_home">
 
     <fragment
+        android:id="@+id/navigation_calendar"
+        android:name="com.example.firstapp.ui.calendar.CalendarFragment"
+        android:label="@string/title_calendar"
+        tools:layout="@layout/fragment_calendar" />
+
+    <fragment
+        android:id="@+id/navigation_body"
+        android:name="com.example.firstapp.ui.body.BodyFragment"
+        android:label="@string/title_body"
+        tools:layout="@layout/fragment_body" />
+    <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.firstapp.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.firstapp.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
         android:id="@+id/navigation_presets"
         android:name="com.example.firstapp.ui.presets.PresetsFragment"
         android:label="@string/title_presets"
         tools:layout="@layout/fragment_presets" />
+
+    <fragment
+        android:id="@+id/navigation_statistics"
+        android:name="com.example.firstapp.ui.statistics.StatisticsFragment"
+        android:label="@string/title_statistics"
+        tools:layout="@layout/fragment_statistics" />
 </navigation>

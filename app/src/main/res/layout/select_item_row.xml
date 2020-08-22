@@ -30,5 +30,5 @@
         android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
         android:layout_alignParentEnd="true"
-        android:background="@drawable/ic_unchecked_radio_button"/>
+        android:background="@drawable/ic_unchecked_radio_btn"/>
 </RelativeLayout>

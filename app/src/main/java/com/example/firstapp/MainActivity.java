@@ -18,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-
 public class MainActivity extends AppCompatActivity {
     Calendar calendar;
     String[] currentWeek = new String[7];
@@ -29,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
         // Setting dates for the current week
         final SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault());
@@ -43,7 +41,12 @@ public class MainActivity extends AppCompatActivity {
         // Bottom toolbar
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfig = new AppBarConfiguration.Builder(
-                R.id.navigation_dashboard, R.id.navigation_home, R.id.navigation_presets).build();
+                R.id.navigation_calendar,
+                R.id.navigation_statistics,
+                R.id.navigation_home,
+                R.id.navigation_body,
+                R.id.navigation_presets
+        ).build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfig);
         NavigationUI.setupWithNavController(navView, navController);

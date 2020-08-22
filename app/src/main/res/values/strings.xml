@@ -123,17 +123,31 @@
     <string name="cancel">Cancel</string>
     <string name="placeholder">Item Placeholder</string>
 
+    <string name="addPreset">Add Preset</string>
+    <string name="presets">Presets</string>
+
+    <!-- Strings dealing with database entries -->
     <string name="add">Add</string>
     <string name="addNew">Add New</string>
     <string name="choosePreset">Choose Preset</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
 
-    <string name="addPreset">Add Preset</string>
-    <string name="presets">Presets</string>
+
     <string name="title_activity_test">MainActivity</string>
-    <string name="title_home">Home</string>
+    <string name="title_body">Body</string>
+    <string name="title_calendar">Calendar</string>
     <string name="title_dashboard">Dashboard</string>
+    <string name="title_home">Home</string>
     <string name="title_presets">Presets</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_statistics">Statistics</string>
+
+    <!-- Body Tab Specific Strings -->
+    <string name="basicBodyInfo">Basic Body Info</string>
+    <string name="additionalInfo">Additional Info</string>
+    <string name="currentWeight">Current Weight</string>
+    <string name="update">Update</string>
 
     <!-- Settings Strings -->
     <string name="settings">Settings</string>
@@ -164,6 +178,22 @@
     <string name="lower">Lower Body</string>
     <string name="custom">Custom</string>
 
+
+    <string-array name="upperExercises">
+        <item name="overheadPress">Overhead/Shoulder Press</item>
+        <item name="frontRaise">Front Raise</item>
+        <item name="lateralRaise">Side/Lateral Raise</item>
+        <item name="benchPress">Bench Press</item>
+        <item name="pushUp">Push Up</item>
+        <item name="tricepExtension">Tricep Extension</item>
+        <item name="tricepPushDown">Tricep Push Down</item>
+        <item name="pullUp">Pull Up</item>
+        <item name="row">Row</item>
+        <item name="facePull">Face Pull</item>
+        <item name="pullDown">Lat Pull Down</item>
+        <item name="bicepCurl">Bicep Curl</item>
+
+    </string-array>
     <!-- Default Common Upper Body Exercises -->
     <string name="overheadPress">Overhead/Shoulder Press</string>
     <string name="frontRaise">Front Raise</string>
@@ -177,6 +207,27 @@
     <string name="facePull">Face Pull</string>
     <string name="pullDown">Lat Pull Down</string>
     <string name="bicepCurl">Bicep Curl</string>
+
+    <!-- Bench Variations -->
+    <string name="flatBench">Flat Bench Press</string>
+    <string name="inclineBench">Incline Bench Press</string>
+    <string name="declineBench">Decline Bench Press</string>
+    <string name="pinPress">Pin Press</string>
+
+    <!-- Push Up Variations -->
+    <string name="levelPushUp">Level Push Up</string>
+    <string name="kneePushUp">Knee Push Up</string>
+    <string name="inclinePushUp">Incline Push Up</string>
+    <string name="declinePushUp">Decline Push Up</string>
+    <string name="diamondPushUp">Diamond Push Up</string>
+    <string name="cobraPushUp">Cobra Push Up</string>
+    <string name="handstandPushUp">Handstand Push Up</string>
+
+    <!-- Row Variations -->
+    <string name="bentOverRow">Bent Over Row</string>
+    <string name="pendlayRow">Pendlay Row</string>
+    <string name="tBarRow">T-Bar Row</string>
+    <string name="seatedRow">Seated Row</string>
 
     <!-- Default Common Lower Body Exercises -->
     <string name="squat">Squat</string>

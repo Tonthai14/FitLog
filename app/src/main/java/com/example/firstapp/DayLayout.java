@@ -38,6 +38,7 @@ public class DayLayout extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         Objects.requireNonNull(getSupportActionBar()).setTitle(date);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         db = new EntryDatabase(this);
         List<Entry> dayEntries = db.getDayEntries(date);
@@ -71,15 +72,19 @@ public class DayLayout extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.add_new) {
-            Toast.makeText(this, "Add new entry", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, AddExercise.class);
-            intent.putExtra("date", date);
-            startActivity(intent);
-        }
-        else if(item.getItemId() == R.id.choose_preset) {
-            Toast.makeText(this, "Choose a preset", Toast.LENGTH_SHORT).show();
-            
+        switch (item.getItemId()) {
+            case R.id.add_new:
+                Toast.makeText(this, "Add new entry", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, AddExercise.class);
+                intent.putExtra("date", date);
+                startActivity(intent);
+                break;
+            case R.id.choose_preset:
+                Toast.makeText(this, "Choose a preset", Toast.LENGTH_SHORT).show();
+                break;
+            case android.R.id.home:
+                finish();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

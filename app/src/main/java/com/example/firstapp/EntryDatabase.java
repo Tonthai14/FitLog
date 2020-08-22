@@ -41,7 +41,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
     private static final String KEY_AM_PM = "AM_PM";
 
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE " + TABLE_NAME + " (" +
+        String createTable = "CREATE TABLE " + TABLE_NAME + " (" +
                 KEY_ID + " INTEGER PRIMARY KEY," +
                 KEY_DATE + " TEXT," +
                 KEY_EXERCISE + " TEXT," +
@@ -64,7 +64,7 @@ public class EntryDatabase extends SQLiteOpenHelper {
                 KEY_DATE_MIN + " TEXT," +
                 KEY_AM_PM + " TEXT"
                 + " )";
-        db.execSQL(query);
+        db.execSQL(createTable);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
