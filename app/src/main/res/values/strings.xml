@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Workout Logger</string>
+    <string name="app_name">Exercise Logger</string>
 
     <string-array name="days">
         <item>@string/sunday</item>
