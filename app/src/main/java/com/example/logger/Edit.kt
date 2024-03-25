@@ -91,7 +91,7 @@ class Edit : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         setSpinnerItem(weightUnit!!, entry.weightType)
         setSpinnerItem(programType!!, entry.programType)
         setSpinnerItem(rpe!!, if (entry.rpe == null) "" else entry.rpe)
-        setSpinnerItem(timeAM_PM!!, if (entry.aM_PM == null) "" else entry.aM_PM)
+        setSpinnerItem(timeAM_PM!!, if (entry.AM_PM == null) "" else entry.AM_PM)
 
         exercise!!.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -115,7 +115,7 @@ class Edit : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         spinner.onItemSelectedListener = this
     }
 
-    fun setSpinnerItem(spinner: Spinner, item: String) {
+    private fun setSpinnerItem(spinner: Spinner, item: String?) {
         for (index in spinner.indices) {
             if (spinner.getItemAtPosition(index).equals(item)) {
                 spinner.setSelection(index)
@@ -131,27 +131,28 @@ class Edit : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.saveEntry) {
-            val entry = Entry(id!!, date,
-                exercise!!.text.toString(),
-                intensity!!.selectedItem.toString(),
-                exerciseType!!.selectedItem.toString(),
-                weight!!.text.toString(),
-                weightUnit!!.selectedItem.toString(),
-                weightType!!.selectedItem.toString(),
-                weightTypeOther!!.text.toString(),
-                programType!!.selectedItem.toString(),
-                sets!!.text.toString(),
-                reps!!.text.toString(),
-                elapsedHrs!!.text.toString(),
-                elapsedMin!!.text.toString(),
-                elapsedSec!!.text.toString(),
-                restMin!!.text.toString(),
-                restSec!!.text.toString(),
-                rpe!!.selectedItem.toString(),
-                dateHrs!!.text.toString(),
-                dateMin!!.text.toString(),
-                timeAM_PM!!.selectedItem.toString()
-            )
+            val entry = Entry()
+            entry.id = id!!
+            entry.date = date
+            entry.exercise = exercise!!.text.toString()
+            entry.intensity = intensity!!.selectedItem.toString()
+            entry.exerciseType = exerciseType!!.selectedItem.toString()
+            entry.weight = weight!!.text.toString()
+            entry.weightUnit = weightUnit!!.selectedItem.toString()
+            entry.weightType = weightType!!.selectedItem.toString()
+            entry.weightTypeOther = weightTypeOther!!.text.toString()
+            entry.programType = programType!!.selectedItem.toString()
+            entry.sets = sets!!.text.toString()
+            entry.reps = reps!!.text.toString()
+            entry.elapsedHrs = elapsedHrs!!.text.toString()
+            entry.elapsedMin = elapsedMin!!.text.toString()
+            entry.elapsedSec = elapsedSec!!.text.toString()
+            entry.restMin= restMin!!.text.toString()
+            entry.restSec = restSec!!.text.toString()
+            entry.rpe = rpe!!.selectedItem.toString()
+            entry.dateHrs = dateHrs!!.text.toString()
+            entry.dateMin = dateMin!!.text.toString()
+            entry.AM_PM = timeAM_PM!!.selectedItem.toString()
             Log.d("EDITED", "ID before saving edit: ${entry.id}")
 
             val db = EntryDatabase(applicationContext)

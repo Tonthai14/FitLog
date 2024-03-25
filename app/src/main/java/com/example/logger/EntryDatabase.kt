@@ -64,30 +64,31 @@ class EntryDatabase(ct: Context?) : SQLiteOpenHelper(ct, "EntryDB", null, 14) {
         onCreate(db)
     }
     fun addEntry(entry: Entry): Long {
-        val cv = ContentValues()
-        cv.put(KEY_DATE, entry.date)
-        cv.put(KEY_EXERCISE, entry.exercise)
-        cv.put(KEY_INTENSITY, entry.intensity)
-        cv.put(KEY_EXERCISE_TYPE, entry.exerciseType)
-        cv.put(KEY_WEIGHT, entry.weight)
-        cv.put(KEY_WEIGHT_UNIT, entry.weightUnit)
-        cv.put(KEY_WEIGHT_TYPE, entry.weightType)
-        cv.put(KEY_WEIGHT_TYPE_OTHER, entry.weightTypeOther)
-        cv.put(KEY_PROGRAM_TYPE, entry.programType)
-        cv.put(KEY_SETS, entry.sets)
-        cv.put(KEY_REPS, entry.reps)
-        cv.put(KEY_ELAPSED_HRS, entry.elapsedHrs)
-        cv.put(KEY_ELAPSED_MIN, entry.elapsedMin)
-        cv.put(KEY_ELAPSED_SEC, entry.elapsedSec)
-        cv.put(KEY_REST_MIN, entry.restMin)
-        cv.put(KEY_REST_SEC, entry.restSec)
-        cv.put(KEY_RPE, entry.rpe)
-        cv.put(KEY_DATE_HRS, entry.dateHrs)
-        cv.put(KEY_DATE_MIN, entry.dateMin)
-        cv.put(KEY_AM_PM, entry.aM_PM)
+        val cv = ContentValues().apply {
+            put(KEY_DATE, entry.date)
+            put(KEY_EXERCISE, entry.exercise)
+            put(KEY_INTENSITY, entry.intensity)
+            put(KEY_EXERCISE_TYPE, entry.exerciseType)
+            put(KEY_WEIGHT, entry.weight)
+            put(KEY_WEIGHT_UNIT, entry.weightUnit)
+            put(KEY_WEIGHT_TYPE, entry.weightType)
+            put(KEY_WEIGHT_TYPE_OTHER, entry.weightTypeOther)
+            put(KEY_PROGRAM_TYPE, entry.programType)
+            put(KEY_SETS, entry.sets)
+            put(KEY_REPS, entry.reps)
+            put(KEY_ELAPSED_HRS, entry.elapsedHrs)
+            put(KEY_ELAPSED_MIN, entry.elapsedMin)
+            put(KEY_ELAPSED_SEC, entry.elapsedSec)
+            put(KEY_REST_MIN, entry.restMin)
+            put(KEY_REST_SEC, entry.restSec)
+            put(KEY_RPE, entry.rpe)
+            put(KEY_DATE_HRS, entry.dateHrs)
+            put(KEY_DATE_MIN, entry.dateMin)
+            put(KEY_AM_PM, entry.AM_PM)
+        }
         return this.writableDatabase.insert(TABLE_NAME, null, cv)
     }
-    fun getEntry(id: Long): Entry {
+    fun getEntry(idToFetch: Long): Entry {
         val query = arrayOf(
             KEY_ID,
             KEY_DATE,
@@ -115,36 +116,36 @@ class EntryDatabase(ct: Context?) : SQLiteOpenHelper(ct, "EntryDB", null, 14) {
             TABLE_NAME,
             query,
             "$KEY_ID=?",
-            arrayOf(id.toString()),
+            arrayOf(idToFetch.toString()),
             null,
             null,
             null,
             null
         )
         cursor.moveToFirst()
-        return Entry(
-            cursor.getString(0).toLong(),
-            cursor.getString(1),
-            cursor.getString(2),
-            cursor.getString(3),
-            cursor.getString(4),
-            cursor.getString(5),
-            cursor.getString(6),
-            cursor.getString(7),
-            cursor.getString(8),
-            cursor.getString(9),
-            cursor.getString(10),
-            cursor.getString(11),
-            cursor.getString(12),
-            cursor.getString(13),
-            cursor.getString(14),
-            cursor.getString(15),
-            cursor.getString(16),
-            cursor.getString(17),
-            cursor.getString(18),
-            cursor.getString(19),
-            cursor.getString(20)
-        )
+        return Entry().apply {
+            id = cursor.getString(0).toLong()
+            date = cursor.getString(1)
+            exercise = cursor.getString(2)
+            intensity = cursor.getString(3)
+            exerciseType = cursor.getString(4)
+            weight = cursor.getString(5)
+            weightUnit = cursor.getString(6)
+            weightType = cursor.getString(7)
+            weightTypeOther = cursor.getString(8)
+            programType = cursor.getString(9)
+            sets = cursor.getString(10)
+            reps = cursor.getString(11)
+            elapsedHrs = cursor.getString(12)
+            elapsedMin = cursor.getString(13)
+            elapsedSec = cursor.getString(14)
+            restMin = cursor.getString(15)
+            restSec = cursor.getString(16)
+            rpe = cursor.getString(17)
+            dateHrs = cursor.getString(18)
+            dateMin = cursor.getString(19)
+            AM_PM = cursor.getString(20)
+        }
     }
     fun getAllEntries(): List<Entry> {
         val allEntries: MutableList<Entry> = ArrayList()
@@ -173,7 +174,7 @@ class EntryDatabase(ct: Context?) : SQLiteOpenHelper(ct, "EntryDB", null, 14) {
                 entry.rpe = cursor.getString(17)
                 entry.dateHrs = cursor.getString(18)
                 entry.dateMin = cursor.getString(19)
-                entry.aM_PM = cursor.getString(20)
+                entry.AM_PM = cursor.getString(20)
                 allEntries.add(entry)
             } while (cursor.moveToNext())
         }
@@ -208,7 +209,7 @@ class EntryDatabase(ct: Context?) : SQLiteOpenHelper(ct, "EntryDB", null, 14) {
                     entry.rpe = cursor.getString(17)
                     entry.dateHrs = cursor.getString(18)
                     entry.dateMin = cursor.getString(19)
-                    entry.aM_PM = cursor.getString(20)
+                    entry.AM_PM = cursor.getString(20)
                     dayEntries.add(entry)
                 }
             } while (cursor.moveToNext())
@@ -216,27 +217,28 @@ class EntryDatabase(ct: Context?) : SQLiteOpenHelper(ct, "EntryDB", null, 14) {
         return dayEntries
     }
     fun editEntry(entry: Entry): Int {
-        val cv = ContentValues()
-        cv.put(KEY_EXERCISE, entry.exercise)
-        cv.put(KEY_DATE, entry.date)
-        cv.put(KEY_INTENSITY, entry.intensity)
-        cv.put(KEY_EXERCISE_TYPE, entry.exerciseType)
-        cv.put(KEY_WEIGHT, entry.weight)
-        cv.put(KEY_WEIGHT_UNIT, entry.weightUnit)
-        cv.put(KEY_WEIGHT_TYPE, entry.weightType)
-        cv.put(KEY_WEIGHT_TYPE_OTHER, entry.weightTypeOther)
-        cv.put(KEY_PROGRAM_TYPE, entry.programType)
-        cv.put(KEY_SETS, entry.sets)
-        cv.put(KEY_REPS, entry.reps)
-        cv.put(KEY_ELAPSED_HRS, entry.elapsedHrs)
-        cv.put(KEY_ELAPSED_MIN, entry.elapsedMin)
-        cv.put(KEY_ELAPSED_SEC, entry.elapsedSec)
-        cv.put(KEY_REST_MIN, entry.restMin)
-        cv.put(KEY_REST_SEC, entry.restSec)
-        cv.put(KEY_RPE, entry.rpe)
-        cv.put(KEY_DATE_HRS, entry.dateHrs)
-        cv.put(KEY_DATE_MIN, entry.dateMin)
-        cv.put(KEY_AM_PM, entry.aM_PM)
+        val cv = ContentValues().apply {
+            put(KEY_EXERCISE, entry.exercise)
+            put(KEY_DATE, entry.date)
+            put(KEY_INTENSITY, entry.intensity)
+            put(KEY_EXERCISE_TYPE, entry.exerciseType)
+            put(KEY_WEIGHT, entry.weight)
+            put(KEY_WEIGHT_UNIT, entry.weightUnit)
+            put(KEY_WEIGHT_TYPE, entry.weightType)
+            put(KEY_WEIGHT_TYPE_OTHER, entry.weightTypeOther)
+            put(KEY_PROGRAM_TYPE, entry.programType)
+            put(KEY_SETS, entry.sets)
+            put(KEY_REPS, entry.reps)
+            put(KEY_ELAPSED_HRS, entry.elapsedHrs)
+            put(KEY_ELAPSED_MIN, entry.elapsedMin)
+            put(KEY_ELAPSED_SEC, entry.elapsedSec)
+            put(KEY_REST_MIN, entry.restMin)
+            put(KEY_REST_SEC, entry.restSec)
+            put(KEY_RPE, entry.rpe)
+            put(KEY_DATE_HRS, entry.dateHrs)
+            put(KEY_DATE_MIN, entry.dateMin)
+            put(KEY_AM_PM, entry.AM_PM)
+        }
         return this.writableDatabase.update(TABLE_NAME, cv, "$KEY_ID=?", arrayOf(entry.id.toString()))
     }
     fun deleteEntry(id: Long) {

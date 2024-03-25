@@ -322,28 +322,28 @@ class AddExercise : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.saveEntry) {
             collectItemInputs()
-            val entry = Entry(
-                date,
-                exerciseInput,
-                intensityInput,
-                exerciseTypeInput,
-                weightInput,
-                weightUnitInput,
-                weightTypeInput,
-                weightTypeOtherInput,
-                programTypeInput,
-                setsInput,
-                repsInput,
-                elapsedHrsInput,
-                elapsedMinInput,
-                elapsedSecInput,
-                restMinInput,
-                restSecInput,
-                rpeInput,
-                dateHrsInput,
-                dateMinInput,
-                partOfDayInput
-            )
+            val entry = Entry()
+            entry.date = date
+            entry.exercise = exerciseInput
+            entry.intensity = intensityInput
+            entry.exerciseType = exerciseTypeInput
+            entry.weight = weightInput
+            entry.weightUnit = weightUnitInput
+            entry.weightType = weightTypeInput
+            entry.weightTypeOther = weightTypeOtherInput
+            entry.programType = programTypeInput
+            entry.sets = setsInput
+            entry.reps = repsInput
+            entry.elapsedHrs = elapsedHrsInput
+            entry.elapsedMin = elapsedMinInput
+            entry.elapsedSec = elapsedSecInput
+            entry.restMin = restMinInput
+            entry.restSec = restSecInput
+            entry.rpe = rpeInput
+            entry.dateHrs = dateHrsInput
+            entry.dateMin = dateMinInput
+            entry.AM_PM = partOfDayInput
+
             val db = EntryDatabase(this)
             val id = db.addEntry(entry)
             val confirm = db.getEntry(id)
