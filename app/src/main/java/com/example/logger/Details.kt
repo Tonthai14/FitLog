@@ -74,7 +74,7 @@ class Details : AppCompatActivity() {
             }
             when (spec) {
                 ExtraSpecs.WEIGHTS -> {
-                    weightTypeDisplay?.setVisibility(visible)
+                    weightTypeDisplay?.visibility = visible
                     weightType!!.visibility = visible
                 }
                 ExtraSpecs.RPE -> {
@@ -89,12 +89,10 @@ class Details : AppCompatActivity() {
         }
 
         checkHasInput(programTypes!!, entry.programType!!)
-        weight?.setText(getString(R.string.weightText, entry.weight, entry.weightUnit))
+        weight?.text = getString(R.string.weightText, entry.weight, entry.weightUnit)
         displayProgramType(entry)
     }
     private fun checkHasInput(item: TextView, text: String?): Boolean {
-        if (text == null)
-            return false
         if (!item.text.equals("")) {
             item.text = getString(R.string.addSpace, item.text, " ")
         } else {
