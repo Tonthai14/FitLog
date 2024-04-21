@@ -1,7 +1,6 @@
-package com.example.logger.ui.home
+package com.example.logger.home
 
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -17,7 +16,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.logger.DataAdapter
-import com.example.logger.DayLayout
 import com.example.logger.R
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -32,8 +30,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private var currentWeek: Array<String>? = null
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
-                              savedInstanceState: Bundle?
-    ): View {
+                              savedInstanceState: Bundle?): View {
         ViewModelProvider(this)[HomeViewModel::class.java]
         val root: View = inflater.inflate(R.layout.fragment_home, container, false)
 
@@ -72,20 +69,20 @@ class HomeFragment : Fragment(), View.OnClickListener {
         return datesForWeek
     }
     override fun onClick(view: View?) {
-        val intent = Intent(context, DayLayout::class.java)
+        //val intent = Intent(context, DayLayout::class.java)
         when (view?.id) {
             R.id.today -> {
                 Log.d("HomeFrag", "Clicked on today: $dateToday")
-                intent.putExtra("date", dateToday)
+                //intent.putExtra("date", dateToday)
             }
-            R.id.tomorrow -> intent.putExtra("date", dateTomorrow)
-            R.id.yesterday -> intent.putExtra("date", dateYesterday)
+            //R.id.tomorrow -> intent.putExtra("date", dateTomorrow)
+            //R.id.yesterday -> intent.putExtra("date", dateYesterday)
             R.id.thisWeek -> {
                 displayDaysOfThisWeek(view)
                 return
             }
         }
-        startActivity(intent)
+        //startActivity(intent)
     }
 
     private fun displayDaysOfThisWeek(view: View?) {
@@ -106,11 +103,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
         cancelBtn.setOnClickListener { dialog.dismiss() }
         val confirmBtn: Button = dialog.findViewById(R.id.confirm)
         confirmBtn.setOnClickListener {
-            val day = Intent(context, DayLayout::class.java)
+            //val day = Intent(context, DayLayout::class.java)
             if (adapter.lastCheckedPosition in 0..6) {
-                day.putExtra("date", currentWeek?.get(adapter.lastCheckedPosition))
+                //day.putExtra("date", currentWeek?.get(adapter.lastCheckedPosition))
             }
-            startActivity(day)
+            //startActivity(day)
         }
 
         dialog.show()

@@ -1,4 +1,4 @@
-package com.example.logger.ui.home;
+package com.example.logger.home;
 
 import androidx.lifecycle.ViewModel;
 

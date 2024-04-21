@@ -7,6 +7,8 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import com.example.logger.shared.viewmodels.EntryViewModel
+import kotlin.concurrent.Volatile
 
 
 class EntryDatabase(ct: Context?) : SQLiteOpenHelper(ct, "EntryDB", null, 14) {
@@ -63,6 +65,13 @@ class EntryDatabase(ct: Context?) : SQLiteOpenHelper(ct, "EntryDB", null, 14) {
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
         onCreate(db)
     }
+    companion object {
+        @Volatile
+        private var instance: EntryDatabase? = null
+        fun getInstance(context: Context?) = instance ?: synchronized(this) {
+            instance ?: EntryDatabase(context).also { instance = it }
+        }
+    }
     fun addEntry(entry: Entry): Long {
         val cv = ContentValues().apply {
             put(KEY_DATE, entry.date)
@@ -85,6 +94,31 @@ class EntryDatabase(ct: Context?) : SQLiteOpenHelper(ct, "EntryDB", null, 14) {
             put(KEY_DATE_HRS, entry.dateHrs)
             put(KEY_DATE_MIN, entry.dateMin)
             put(KEY_AM_PM, entry.AM_PM)
+        }
+        return this.writableDatabase.insert(TABLE_NAME, null, cv)
+    }
+    fun addEntry(date: String?, viewModel: EntryViewModel): Long {
+        val cv = ContentValues().apply {
+            put(KEY_DATE, date)
+            put(KEY_EXERCISE, viewModel.exerciseName)
+            put(KEY_INTENSITY, "")
+            put(KEY_EXERCISE_TYPE, viewModel.exerciseType)
+            put(KEY_WEIGHT, viewModel.weightAmount)
+            put(KEY_WEIGHT_UNIT, viewModel.weightUnitOfMeasurement.toString())
+            put(KEY_WEIGHT_TYPE, "")
+            put(KEY_WEIGHT_TYPE_OTHER, "")
+            put(KEY_PROGRAM_TYPE, "")
+            put(KEY_SETS, viewModel.numberOfSets)
+            put(KEY_REPS, viewModel.numberOfReps)
+            put(KEY_ELAPSED_HRS, "")
+            put(KEY_ELAPSED_MIN, "")
+            put(KEY_ELAPSED_SEC, "")
+            put(KEY_REST_MIN, "")
+            put(KEY_REST_SEC, "")
+            put(KEY_RPE, "")
+            put(KEY_DATE_HRS, "")
+            put(KEY_DATE_MIN, "")
+            put(KEY_AM_PM, "")
         }
         return this.writableDatabase.insert(TABLE_NAME, null, cv)
     }
@@ -240,6 +274,31 @@ class EntryDatabase(ct: Context?) : SQLiteOpenHelper(ct, "EntryDB", null, 14) {
             put(KEY_AM_PM, entry.AM_PM)
         }
         return this.writableDatabase.update(TABLE_NAME, cv, "$KEY_ID=?", arrayOf(entry.id.toString()))
+    }
+    fun editEntry(id: Long, date: String?, viewModel: EntryViewModel): Int {
+        val cv = ContentValues().apply {
+            put(KEY_DATE, date)
+            put(KEY_EXERCISE, viewModel.exerciseName)
+            put(KEY_INTENSITY, "")
+            put(KEY_EXERCISE_TYPE, viewModel.exerciseType)
+            put(KEY_WEIGHT, viewModel.weightAmount)
+            put(KEY_WEIGHT_UNIT, viewModel.weightUnitOfMeasurement.toString())
+            put(KEY_WEIGHT_TYPE, "")
+            put(KEY_WEIGHT_TYPE_OTHER, "")
+            put(KEY_PROGRAM_TYPE, "")
+            put(KEY_SETS, viewModel.numberOfSets)
+            put(KEY_REPS, viewModel.numberOfReps)
+            put(KEY_ELAPSED_HRS, "")
+            put(KEY_ELAPSED_MIN, "")
+            put(KEY_ELAPSED_SEC, "")
+            put(KEY_REST_MIN, "")
+            put(KEY_REST_SEC, "")
+            put(KEY_RPE, "")
+            put(KEY_DATE_HRS, "")
+            put(KEY_DATE_MIN, "")
+            put(KEY_AM_PM, "")
+        }
+        return this.writableDatabase.update(TABLE_NAME, cv, "$KEY_ID=?", arrayOf(id.toString()))
     }
     fun deleteEntry(id: Long) {
         this.writableDatabase.delete(TABLE_NAME, "$KEY_ID=?", arrayOf(id.toString()))

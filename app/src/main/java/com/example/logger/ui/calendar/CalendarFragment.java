@@ -10,7 +10,6 @@ import android.widget.CalendarView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.logger.DayLayout;
 import com.example.logger.R;
 
 import java.text.ParseException;
@@ -45,9 +44,9 @@ public class CalendarFragment extends Fragment {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                Intent intent = new Intent(view.getContext(), DayLayout.class);
-                intent.putExtra("date", date);
-                startActivity(intent);
+                //Intent intent = new Intent(view.getContext(), DayLayout.class);
+                //intent.putExtra("date", date);
+                //startActivity(intent);
             }
         });
     }

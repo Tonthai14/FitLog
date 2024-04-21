@@ -14,7 +14,15 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.core.view.indices
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.logger.shared.viewmodels.EntryViewModel
+import com.example.logger.shared.components.EditableFieldsScreen
+import com.example.logger.shared.components.RowDisplay
 
 class Edit : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var exercise: EditText? = null
@@ -168,4 +176,35 @@ class Edit : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {}
     override fun onNothingSelected(parent: AdapterView<*>?) {}
+}
+
+@Composable
+fun EditEntryScreen(
+    entry: Entry,
+    onNavigateBack: () -> Unit,
+    viewModel: EntryViewModel = viewModel()
+) {
+    LaunchedEffect(Unit) {
+        viewModel.fetchEntryData(entry.id)
+    }
+
+    EditableFieldsScreen(
+        title = "Editing Entry",
+        extraContent = {
+            RowDisplay(content = {
+                Button(onClick = {
+                    onSaveChanges(entry.id, entry.date, viewModel)
+                    onNavigateBack()
+                }) {
+                    Text(text = "Save Changes")
+                }
+            })
+        },
+        viewModel = viewModel
+    )
+}
+
+fun onSaveChanges(id: Long, date: String?, viewModel: EntryViewModel) {
+    val db = EntryDatabase.getInstance(null)
+    val editedEntry = db.editEntry(id, date, viewModel)
 }

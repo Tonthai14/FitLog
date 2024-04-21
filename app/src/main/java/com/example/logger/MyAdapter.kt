@@ -73,11 +73,11 @@ class MyAdapter(ct: Context, entries: List<Entry?>?, date: String?) : RecyclerVi
             duration = itemView.findViewById(R.id.duration)
             exerciseVisual = itemView.findViewById(R.id.exerciseVisual)
             itemView.setOnClickListener {
-                val details = Intent(it.context, Details::class.java)
-                details.putExtra("ID", entries?.get(adapterPosition)?.id)
-                details.putExtra("date", date)
+//                val details = Intent(it.context, Details::class.java)
+//                details.putExtra("ID", entries?.get(adapterPosition)?.id)
+//                details.putExtra("date", date)
                 val CONFIRM_ENTRY_DELETION = 1 // TODO: Not properly getting rid of old entry list
-                (it.context as Activity).startActivityForResult(details, CONFIRM_ENTRY_DELETION)
+                //(it.context as Activity).startActivityForResult(details, CONFIRM_ENTRY_DELETION)
             }
         }
     }
