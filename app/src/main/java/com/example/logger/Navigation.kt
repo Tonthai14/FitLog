@@ -1,6 +1,5 @@
 package com.example.logger
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -32,15 +31,24 @@ fun ExerciseLogNavHost(
     NavHost(navController = navController, startDestination = HOME_ROUTE) {
         composable(HOME_ROUTE) {
             HomeRoute(
-                onNavigateToDay = { date -> navController.navigate("day/$date") }
+                onNavigateToDay = { date ->
+                    navController.navigate(DAY_ROUTE
+                        .replace(oldValue = "{date}", newValue = date))
+                }
             )
         }
         composable(DAY_ROUTE) {
             val date = it.arguments?.getString("date")
             DayRoute(
                 date = date,
-                onNavigateToAddEntry = { inputDate -> navController.navigate("add/$inputDate") },
-                onNavigateToEntry = { id -> navController.navigate("details/entry/$id") }
+                onNavigateToAddEntry = { inputDate ->
+                    navController.navigate(ADD_ENTRY_ROUTE
+                        .replace(oldValue = "{date}", newValue = "$inputDate"))
+                },
+                onNavigateToEntry = { id ->
+                    navController.navigate(ENTRY_DETAILS_ROUTE
+                        .replace(oldValue = "{id}", newValue = "$id"))
+                }
             )
         }
         composable(ADD_ENTRY_ROUTE) {
@@ -52,17 +60,18 @@ fun ExerciseLogNavHost(
         }
         composable(ENTRY_DETAILS_ROUTE) {
             val entryId = it.arguments?.getString("id")!!.toLong()
-            val entry = EntryDatabase.getInstance(null).getEntry(entryId)
             EntryDetailsRoute(
-                entry = entry,
-                onNavigateToEdit = { navController.navigate("edit/entry/$entryId") }
+                id = entryId,
+                onNavigateToEdit = { id ->
+                    navController.navigate(EDIT_ENTRY_ROUTE
+                        .replace(oldValue = "{id}", newValue = "$id"))
+                }
             )
         }
         composable(EDIT_ENTRY_ROUTE) {
             val entryId = it.arguments?.getString("id")!!.toLong()
-            val entry = EntryDatabase.getInstance(null).getEntry(entryId)
             EditEntryRoute(
-                entry = entry,
+                id = entryId,
                 onNavigateBack = { navController.popBackStack() }
             )
         }

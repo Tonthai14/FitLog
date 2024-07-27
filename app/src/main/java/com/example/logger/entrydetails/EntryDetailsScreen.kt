@@ -21,6 +21,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,31 +33,33 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.logger.Entry
-import com.example.logger.EntryDatabase
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.logger.AppViewModelProvider
+import com.example.logger.shared.viewmodels.EntryViewModel
 
 @Preview
 @Composable
 fun EntryDetailsScreenPreview() {
-    val entry = Entry()
-    entry.exercise = "Bench Press"
-    entry.intensity = "Moderate"
-    entry.exerciseType = "Weights"
-    entry.weightType = "Barbell"
-    entry.weight = "135"
-    entry.programType = "Sets x Reps"
-    EntryDetailsScreen(entry = entry, {})
+    EntryDetailsScreen(id = 1, {})
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EntryDetailsScreen(entry: Entry, onNavigateToEdit: (entryId: Long) -> Unit) {
+fun EntryDetailsScreen(
+    id: Long,
+    onNavigateToEdit: (entryId: Long) -> Unit,
+    viewModel: EntryViewModel = viewModel(factory = AppViewModelProvider.Factory)
+) {
+    LaunchedEffect(Unit) {
+        viewModel.loadExistingData(id)
+    }
+
     var showDeleteDialog by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = entry.exercise!!, fontWeight = FontWeight.Bold)
+                    Text(text = viewModel.exerciseName, fontWeight = FontWeight.Bold)
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -66,7 +69,7 @@ fun EntryDetailsScreen(entry: Entry, onNavigateToEdit: (entryId: Long) -> Unit) 
                     IconButton(onClick = { showDeleteDialog = true }) {
                         Icon(imageVector = Icons.Filled.Delete, contentDescription = "Delete Entry")
                     }
-                    IconButton(onClick = { onNavigateToEdit(entry.id) }) {
+                    IconButton(onClick = { onNavigateToEdit(id) }) {
                         Icon(imageVector = Icons.Filled.Edit, contentDescription = "Edit Entry")
                     }
                 }
@@ -79,24 +82,22 @@ fun EntryDetailsScreen(entry: Entry, onNavigateToEdit: (entryId: Long) -> Unit) 
                 .padding(it)
                 .fillMaxSize()
         ) {
-            DetailRow(label = "Intensity", value = entry.intensity)
-            DetailRow(label = "Exercise Type", value = entry.exerciseType)
-            DetailRow(label = "Weight Type", value = entry.weightType)
-            DetailRow(label = "Weight", value = entry.weight)
-            DetailRow(label = "Unit of Measurement", value = entry.weightUnit)
-            DetailRow(label = "Program Type", value = entry.programType)
-            DetailRow(label = "RPE", value = entry.rpe)
-            DetailRow(label = "Time", value = entry.AM_PM)
+            DetailRow(label = "Intensity", value = "Placeholder")
+            DetailRow(label = "Exercise Type", value = viewModel.exerciseType.toString())
+            DetailRow(label = "Weight Type", value = "Placeholder")
+            DetailRow(label = "Weight", value = viewModel.weightAmount.toString())
+            DetailRow(label = "Unit of Measurement", value = viewModel.weightUnitOfMeasurement.toString())
+            DetailRow(label = "Program Type", value = "Placeholder")
         }
     }
 
     if (showDeleteDialog) {
-        DeleteEntryDialog(entry.id)
+        DeleteEntryDialog(viewModel, id)
     }
 }
 
 @Composable
-fun DeleteEntryDialog(id: Long) {
+fun DeleteEntryDialog(viewModel: EntryViewModel, id: Long) {
     var dismissAlertDialog by remember { mutableStateOf(false) }
     var confirmDeletion by remember { mutableStateOf(false) }
 
@@ -118,13 +119,15 @@ fun DeleteEntryDialog(id: Long) {
     )
 
     if (confirmDeletion) {
-        EntryDeletion(id)
+        EntryDeletion(viewModel, id)
     }
 }
 
 @Composable
-fun EntryDeletion(id: Long) {
-    EntryDatabase(LocalContext.current).deleteEntry(id)
+fun EntryDeletion(viewModel: EntryViewModel, id: Long) {
+    LaunchedEffect(Unit) {
+        viewModel.deleteEntry(id)
+    }
     Toast.makeText(LocalContext.current, "Entry Deleted", Toast.LENGTH_SHORT).show()
 }
 

@@ -1,44 +1,42 @@
-package com.example.logger.addentry
+package com.example.logger.editentry
 
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.logger.AppViewModelProvider
+import com.example.logger.shared.viewmodels.EntryViewModel
 import com.example.logger.shared.components.EditableFieldsScreen
 import com.example.logger.shared.components.RowDisplay
-import com.example.logger.shared.viewmodels.EntryViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun AddEntryScreen(
-    date: String?,
+fun EditEntryScreen(
+    id: Long,
     onNavigateBack: () -> Unit,
     viewModel: EntryViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val coroutineScope = rememberCoroutineScope()
+    LaunchedEffect(Unit) {
+        viewModel.loadExistingData(id)
+    }
+
     EditableFieldsScreen(
-        title = "Add entry for $date",
+        title = "Editing Entry",
         extraContent = {
             RowDisplay(content = {
                 Button(onClick = {
                     coroutineScope.launch {
-                        viewModel.saveEntry(date)
+                        viewModel.updateEntry(id)
                         onNavigateBack()
                     }
                 }) {
-                    Text(text = "Save")
+                    Text(text = "Save Changes")
                 }
             })
         },
         viewModel = viewModel
     )
-}
-
-@Preview
-@Composable
-fun AddEntryScreenPreview() {
-    AddEntryScreen("2024-04-11", {})
 }

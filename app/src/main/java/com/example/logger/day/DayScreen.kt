@@ -24,26 +24,30 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.logger.Entry
-import com.example.logger.R
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.logger.AppViewModelProvider
+import com.example.logger.data.ExerciseEntry
+import com.example.logger.shared.viewmodels.EntriesViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DayScreen(
     date: String?,
-    entries: MutableList<Entry>?,
     onNavigateToAddEntry: (date: String?) -> Unit,
-    onNavigateToEntry: (entryId: Long) -> Unit
+    onNavigateToEntry: (entryId: Long) -> Unit,
+    viewModel: EntriesViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
+    LaunchedEffect(Unit) {
+        viewModel.loadEntriesByDate(date!!)
+    }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -68,7 +72,7 @@ fun DayScreen(
                 .padding(it)
                 .fillMaxSize()
         ) {
-            for (entry in entries!!) {
+            for (entry in viewModel.exerciseEntries) {
                 EntryDisplay(entry, onNavigateToEntry)
             }
         }
@@ -76,7 +80,7 @@ fun DayScreen(
 }
 
 @Composable
-fun EntryDisplay(entry: Entry, onNavigateToEntry: (entryId: Long) -> Unit) {
+fun EntryDisplay(entry: ExerciseEntry, onNavigateToEntry: (entryId: Long) -> Unit) {
     Row(
         horizontalArrangement = Arrangement.Center,
         modifier = Modifier
@@ -94,7 +98,7 @@ fun EntryDisplay(entry: Entry, onNavigateToEntry: (entryId: Long) -> Unit) {
             horizontalArrangement = Arrangement.Absolute.Right,
             modifier = Modifier.weight(1f)
         ) {
-            Text(text = entry.exercise!!,
+            Text(text = entry.exerciseName,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Right
@@ -103,44 +107,9 @@ fun EntryDisplay(entry: Entry, onNavigateToEntry: (entryId: Long) -> Unit) {
         VerticalDivider(color = Color.Black, thickness = 2.dp, modifier = Modifier.padding(10.dp, 0.dp, 10.dp, 0.dp))
         Row(modifier = Modifier.weight(1f)) {
             Column {
-                Text(text = entry.exerciseType!!)
-                var duration = "None"
-                when (entry.programType) {
-                    "Sets x Reps" -> duration = LocalContext.current.getString(R.string.programNumbers, entry.sets, "Sets", "x", entry.reps, "Reps")
-                    "Sets x Duration" -> duration = LocalContext.current.getString(R.string.programNumbers, entry.sets, "Sets", "x", entry.elapsedMin, "Mins")
-                    "Reps" -> duration = LocalContext.current.getString(R.string.programNumbers, "", entry.reps, "Reps", "", "")
-                    "1 Rep Max" -> duration = entry.programType!!
-                }
-                Text(text = duration)
+                Text(text = entry.exerciseType.toString())
+                Text(text = entry.structure.toString())
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun DayScreenPreview() {
-    val entry1 = Entry()
-    entry1.exercise = "Squat"
-    entry1.date = "04-01-2024"
-    entry1.exerciseType = "Weights"
-    entry1.programType = "Sets x Reps"
-    entry1.sets = "3"
-    entry1.reps = "6"
-    val entry2 = Entry()
-    entry2.exercise = "Push Ups"
-    entry2.date = "04-01-2024"
-    entry2.exerciseType = "Bodyweight"
-    entry2.programType = "Reps"
-    entry2.reps = "24"
-    val entry3 = Entry()
-    entry3.exercise = "Deadlift"
-    entry3.date = "04-01-2024"
-    entry3.exerciseType = "Weights"
-    entry3.programType = "Sets x Reps"
-    entry3.sets = "3"
-    entry3.reps = "8"
-    val entries = mutableListOf(entry1, entry2, entry3)
-
-    DayScreen(date = "04-01-2024", entries = entries, {}, {})
 }

@@ -4,5 +4,5 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun AddEntryRoute(date: String?, onNavigateBack: () -> Unit) {
-    AddEntryScreen(date, onNavigateBack = onNavigateBack)
+    AddEntryScreen(date = date, onNavigateBack = onNavigateBack)
 }

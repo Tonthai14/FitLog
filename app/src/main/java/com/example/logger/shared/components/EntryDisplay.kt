@@ -30,6 +30,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.logger.data.fieldoptions.ExerciseStructure
+import com.example.logger.data.fieldoptions.ExerciseType
+import com.example.logger.data.fieldoptions.WeightMeasurementStandard
 import com.example.logger.shared.viewmodels.EntryViewModel
 
 @Composable
@@ -55,11 +58,11 @@ fun EditableFieldsScreen(
                 )
             })
             RowDisplay(content = {
-                TextField(
-                    label = { Text("Exercise Type") },
-                    value = viewModel.exerciseType,
-                    onValueChange = { input -> viewModel.onExerciseTypeChange(input) },
-                    modifier = Modifier.weight(1f)
+                val exerciseTypes = ExerciseType.entries.map { value -> value.toString() }
+                DropdownOptions(
+                    selectableOptions = exerciseTypes,
+                    currentValue = viewModel.exerciseType.toString(),
+                    onValueChanged = viewModel::onExerciseTypeChange
                 )
             })
             RowDisplay(content = {
@@ -72,11 +75,19 @@ fun EditableFieldsScreen(
                     modifier = Modifier.weight(1f),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
-                val units = EntryViewModel.MeasurementStandard.entries.map { value -> value.toString() }
+                val standards = WeightMeasurementStandard.entries.map { value -> value.toString() }
                 DropdownOptions(
-                    selectableOptions = units,
+                    selectableOptions = standards,
                     currentValue = viewModel.weightUnitOfMeasurement.toString(),
                     onValueChanged = viewModel::onWeightUnitOfMeasurementChange
+                )
+            })
+            RowDisplay(content = {
+                val structureTypes = ExerciseStructure.entries.map { value -> value.toString() }
+                DropdownOptions(
+                    selectableOptions = structureTypes,
+                    currentValue = viewModel.exerciseStructure.toString(),
+                    onValueChanged = viewModel::onExerciseStructureChange
                 )
             })
             RowDisplay(content = {
